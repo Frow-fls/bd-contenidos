@@ -357,7 +357,7 @@ SELECT DISTINCT
 
 	WHERE (sueldo_supervisor-sueldo_empleado) BETWEEN 2000 AND 10000
 
-	ORDER BY nombre_empleado;
+	ORDER BY sueldo_empleado ASC;
 	
 ```
 
