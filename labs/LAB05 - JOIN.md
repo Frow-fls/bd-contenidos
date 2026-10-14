@@ -524,7 +524,19 @@ INSERT INTO Proyecto VALUES ('ProductoGTP',6,'Madrid',5);
 
 Solución:
 ```sql
+INSERT INTO Proyecto VALUES ('ProductoGTP',6,'Madrid',5);
 
+SELECT 
+	P.nombre AS nombre_proyecto,
+	E.nombre AS nombre_empleado,
+	T.horas
+	
+	FROM Proyecto P
+	LEFT JOIN trabaja_en T ON P.numero = T.proyecto
+	LEFT JOIN empleado E ON T.empleado = E.dni
+
+	ORDER BY nombre_proyecto, nombre_empleado;
+	
 ```
 
 Tabla resultado:
