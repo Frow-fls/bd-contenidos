@@ -346,7 +346,19 @@ Tabla resultado:
 Escribe una consulta que devuelva los empleados que ganan entre 2000 y 10000 euros menos que su supervisor directo. Las columnas resultado deben ser: nombre_empleado, sueldo_empleado, nombre_supervisor y sueldo_supervisor.
 
 ```sql
+SELECT DISTINCT
+	E.nombre AS nombre_empleado,
+	E.sueldo AS sueldo_empleado,
+	S.nombre AS nombre_supervisor,
+	S.sueldo AS sueldo_supervisor
+	
+	FROM empleado E
+	INNER JOIN empleado S ON S.dni = E.supervisor
 
+	WHERE (sueldo_supervisor-sueldo_empleado) BETWEEN 2000 AND 10000
+
+	ORDER BY nombre_empleado;
+	
 ```
 
 Tabla resultado:
