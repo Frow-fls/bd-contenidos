@@ -177,7 +177,15 @@ Tabla resultado:
 Escribe una consulta que devuelva el nombre de cada proyecto (nombre_proyecto) y el total de horas trabajadas en cada uno (total_horas_dedicadas), ordena los resultados por las horas trabajabas empezando por el de mayor horas. 
 
 ```sql
-
+SELECT DISTINCT
+	P.nombre AS nombre_proyecto,
+	sum(T.horas) AS total_horas_dedicadas
+	
+	FROM proyecto P
+	INNER JOIN trabaja_en T	ON P.numero = T.proyecto
+	GROUP BY numero
+	ORDER BY total_horas_dedicadas DESC;
+	
 ```
 
 Tabla resultado:
