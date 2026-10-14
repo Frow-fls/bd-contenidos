@@ -21,7 +21,14 @@ Escribe una consulta para obtener el nombre del departamento, su director, su fe
 
 Solución:
 ```sql
-
+SELECT DISTINCT 
+	nombre,
+    director, 
+    date(fechaIngresoDirector) AS fecha,
+	strftime('%m',fechaIngresoDirector) AS mes
+	FROM departamento
+	
+	LIMIT 1;
 ```
 
 Tabla resultado:
