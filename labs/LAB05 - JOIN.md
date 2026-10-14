@@ -275,7 +275,18 @@ Escribe una consulta que devuelva el nombre (nombre_empleado) y apellido1 de emp
 Solución:
 
 ```sql
+SELECT DISTINCT
+	E.nombre AS nombre_empleado,
+	E.apellido1,
+	P.nombre AS nombre_proyecto,
+	P.ubicacion
+	
+	FROM empleado E
+	INNER JOIN trabaja_en T	ON E.dni = T.empleado
+	INNER JOIN proyecto P ON P.numero = T.proyecto
 
+	ORDER BY nombre_empleado;
+	
 ```
 
 Tabla resultado:
