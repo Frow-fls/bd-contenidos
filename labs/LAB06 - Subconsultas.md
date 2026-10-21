@@ -790,6 +790,13 @@ Escribe una consulta que devuelva el `dni` de los empleados que no tienen ningú
 
 Solución:
 ```sql
+SELECT dni
+FROM EMPLEADO 
+WHERE dni NOT IN (
+    SELECT empleado 
+    FROM FAMILIAR
+)
+ORDER BY dni;
 
 ```
 
