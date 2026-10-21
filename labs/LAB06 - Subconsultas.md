@@ -550,7 +550,14 @@ Escribe una consulta que liste el nombre de los proyectos donde trabaja al menos
 
 Solución:
 ```sql
-
+SELECT DISTINCT 
+    P.nombre
+FROM PROYECTO P
+JOIN TRABAJA_EN T ON P.numero = T.proyecto
+JOIN EMPLEADO E ON T.empleado = E.dni
+JOIN DEPARTAMENTO D ON E.dpto = D.numero
+WHERE D.nombre = 'Investigación'
+ORDER BY P.nombre ASC;
 ```
 
 Tabla resultado:
