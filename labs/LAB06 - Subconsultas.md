@@ -308,7 +308,14 @@ Escribe una consulta que liste el nombre y apellido de los empleados que trabaja
 
 Solución:
 ```sql
-
+SELECT DISTINCT 
+    E.nombre, 
+    E.apellido1
+FROM EMPLEADO E
+JOIN TRABAJA_EN T ON E.dni = T.empleado
+JOIN PROYECTO P ON T.proyecto = P.numero
+WHERE P.ubicacion = 'Madrid'
+ORDER BY E.apellido1 ASC, E.nombre ASC;
 ```
 
 Tabla resultado:
