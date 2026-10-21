@@ -855,7 +855,19 @@ WHERE P.ubicacion = 'Madrid';
 
 Solución:
 ```sql
-
+-- Empleados que trabajan en proyectos ubicados en 'Madrid'
+SELECT 
+    nombre, 
+    apellido1
+FROM EMPLEADO
+WHERE dni IN (  SELECT empleado
+    			FROM TRABAJA_EN
+   				WHERE proyecto IN (SELECT numero
+								   FROM PROYECTO
+								   WHERE ubicacion = 'Madrid' 
+    )
+)
+ORDER BY nombre;
 ```
 
 Tabla resultado:
