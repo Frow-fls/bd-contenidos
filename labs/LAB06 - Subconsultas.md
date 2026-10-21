@@ -455,7 +455,15 @@ Escribe una consulta que liste el el nombre y apellido de cada empleado junto co
 
 Solución:
 ```sql
-
+SELECT 
+    E.nombre,
+    E.apellido1,
+    E.sueldo - ( SELECT AVG(E2.sueldo) 
+       			 FROM EMPLEADO E2 
+     		     WHERE E2.dpto = E.dpto
+   				 ) AS diferenciaSueldoMedio
+FROM EMPLEADO E
+ORDER BY diferenciaSueldoMedio DESC;
 ```
 
 Tabla resultado:
