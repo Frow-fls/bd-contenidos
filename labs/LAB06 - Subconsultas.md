@@ -646,7 +646,20 @@ SELECT nombre, apellido1, sueldo FROM EMPLEADO;
 
 Solución:
 ```sql
-
+UPDATE EMPLEADO
+SET sueldo = sueldo * 1.20
+WHERE dni IN (
+    SELECT empleado
+    FROM TRABAJA_EN
+    GROUP BY empleado
+    HAVING SUM(horas) > (
+        SELECT AVG(total_horas)
+        FROM (
+            SELECT SUM(horas) AS total_horas
+            FROM TRABAJA_EN
+            GROUP BY empleado
+        ) 
+    )
 ```
 
 Tabla resultado:
