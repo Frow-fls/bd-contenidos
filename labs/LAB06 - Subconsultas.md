@@ -32,7 +32,17 @@ La dirección de la empresa necesita un informe completo sobre la situación de 
 
 Solución:
 ```sql
-
+SELECT 
+    D.nombre AS nombre_departamento,
+    DIR.nombre || ' ' || DIR.apellido1 AS nombre_director,
+    COUNT(DISTINCT CASE WHEN E.dni != D.director THEN E.dni END) AS num_empleados,
+    COUNT(DISTINCT P.numero) AS num_proyectos
+FROM DEPARTAMENTO D
+LEFT JOIN EMPLEADO DIR ON D.director = DIR.dni
+LEFT JOIN EMPLEADO E ON D.numero = E.dpto
+LEFT JOIN PROYECTO P ON D.numero = P.dpto
+GROUP BY D.numero, D.nombre, DIR.nombre, DIR.apellido1
+ORDER BY num_empleados DESC;
 ```
 
 Tabla resultado:
