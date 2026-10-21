@@ -186,7 +186,14 @@ Escribe una consulta que muestre los nombres de los departamentos cuyo sueldo me
 
 Solución:
 ```sql
-
+SELECT 
+    D.nombre,
+	AVG(E.sueldo) AS sueldoMedio
+FROM DEPARTAMENTO D
+JOIN EMPLEADO E ON D.numero = E.dpto
+GROUP BY D.nombrE
+HAVING AVG(E.sueldo) > (SELECT AVG(sueldo)
+						FROM EMPLEADO );
 ```
 
 Tabla resultado:
