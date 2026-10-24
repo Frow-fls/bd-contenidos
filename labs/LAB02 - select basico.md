@@ -3,38 +3,42 @@
 
 ---
 
+## Objetivos
+
 - Más operadores y CASE WHEN
 - Valores nulos (null)
 - Funciones de agregación de datos
 - Agrupación
 - Filtrado de agregaciones y agrupaciones
 
+Seguimos trabajando con la base de datos reducida de la plataforma de streaming (`streaming_lab.sql`, tabla `cancion`).
+
 ---
 
-### Ejercicio 1 - Repaso SELECT
+## Ejercicio 1 - Repaso SELECT
 
-Escribe una consulta que calcule y devuelva una columna llamada `what_where` que tenga la especie (`species`) en letras mayúsculas y la isla (`island`) en letras minúsculas de cada pingüino separadas por un solo espacio; y una columna llamada `bill_ratio` que tenga la relación entre la longitud del pico y la profundidad del mismo. Redonda el resultado para mostrar números con un solo decimal. El resultado solo debe incluir pingüinos que no sean hembras. Ordena el resultado de forma descendente por `bill_ratio`. Y limita el resultado a las 10 primeras filas.
+Escribe una consulta que calcule y devuelva una columna llamada `que_donde` que tenga el género (`genero`) en letras mayúsculas y el país (`pais`) en letras minúsculas de cada canción separados por un solo espacio; y una columna llamada `porcentaje_me_gusta` que tenga el porcentaje de reproducciones que han acabado en un "me gusta" (`me_gusta` entre `reproducciones`, multiplicado por 100). Redondea el resultado para mostrar números con un solo decimal. El resultado solo debe incluir canciones que no estén en español. Ordena el resultado de forma descendente por `porcentaje_me_gusta`. Y limita el resultado a las 10 primeras filas.
 
 Solución:
 ```sql
+
 
 ```
 
 Resultado:
 
-| what_where    | bill_ratio |
-| ------------- | ---------- |
-| GENTOO biscoe | 3.6        |
-| GENTOO biscoe | 3.5        |
-| GENTOO biscoe | 3.5        |
-| GENTOO biscoe | 3.5        |
-| GENTOO biscoe | 3.4        |
-| GENTOO biscoe | 3.4        |
-| GENTOO biscoe | 3.4        |
-| GENTOO biscoe | 3.4        |
-| GENTOO biscoe | 3.4        |
-| GENTOO biscoe | 3.3        |
-
+| que_donde           | porcentaje_me_gusta |
+| ------------------- | ------------------- |
+| POP reino unido     | 5.8                 |
+| ROCK reino unido    | 5.6                 |
+| ROCK reino unido    | 5.6                 |
+| ROCK reino unido    | 5.6                 |
+| ROCK estados unidos | 5.6                 |
+| ROCK reino unido    | 5.4                 |
+| POP reino unido     | 5.1                 |
+| ROCK reino unido    | 5.0                 |
+| POP reino unido     | 5.0                 |
+| RAP estados unidos  | 5.0                 |
 
 ---
 
@@ -50,38 +54,36 @@ Resultado:
 
 Código SQL:
 ```sql
-select 
-	species,
-	island,
-	sex,
-	body_mass_g
-from penguins
-where body_mass_g between 3000 and 3150
-order by body_mass_g desc;
+select
+	titulo,
+	genero,
+	pais,
+	anio
+from cancion
+where anio between 1975 and 1983
+order by anio desc;
 ```
-
 Resultado:
 
-| species | island    | sex    | body_mass_g |
-| ------- | --------- | ------ | ----------- |
-| Adelie  | Biscoe    | FEMALE | 3150        |
-| Adelie  | Dream     | FEMALE | 3150        |
-| Adelie  | Biscoe    | FEMALE | 3150        |
-| Adelie  | Torgersen | FEMALE | 3150        |
-| Adelie  | Dream     | FEMALE | 3100        |
-| Adelie  | Biscoe    | FEMALE | 3075        |
-| Adelie  | Torgersen | FEMALE | 3050        |
-| Adelie  | Torgersen | FEMALE | 3050        |
-| Adelie  | Torgersen | FEMALE | 3050        |
-| Adelie  | Dream     | FEMALE | 3050        |
-| Adelie  | Dream     | FEMALE | 3000        |
-| Adelie  | Dream     | FEMALE | 3000        |
+| titulo                     | genero | pais           | anio |
+| -------------------------- | ------ | -------------- | ---- |
+| Let's Dance                | Rock   | Reino Unido    | 1983 |
+| Billie Jean                | Pop    | Estados Unidos | 1982 |
+| Thriller                   | Pop    | Estados Unidos | 1982 |
+| Under Pressure             | Rock   | Reino Unido    | 1981 |
+| Another One Bites the Dust | Rock   | Reino Unido    | 1980 |
+| Don't Stop Me Now          | Rock   | Reino Unido    | 1978 |
+| We Will Rock You           | Rock   | Reino Unido    | 1977 |
+| Heroes                     | Rock   | Reino Unido    | 1977 |
+| Hotel California           | Rock   | Estados Unidos | 1977 |
+| Somebody to Love           | Rock   | Reino Unido    | 1976 |
+| Bohemian Rhapsody          | Rock   | Reino Unido    | 1975 |
+| You're My Best Friend      | Rock   | Reino Unido    | 1975 |
 
-
-- El resultado solo contiene pingüinos en el rango de peso establecido.
-- El operador `between` permite especificar un conjunto de valores en una condición de filtrado. 
+- El resultado solo contiene canciones publicadas en el rango de años establecido (ambos extremos incluidos).
+- El operador `between` permite especificar un conjunto de valores en una condición de filtrado.
 - Los rangos pueden ser de valores numéricos, cadenas de texto, fechas, tiempos, etc.
-- El operador `between`puede usar índices eficientemente. Mayor legibiidad que la misma condición expresada con `>= AND <=`.
+- El operador `between`puede usar índices eficientemente. Mejor rendimiento que la misma condición expresada con `>= AND <=`.
 
 ---
 
@@ -90,30 +92,30 @@ Resultado:
 Código SQL:
 ```sql
 select distinct
-	species,
-	island,
-	sex
-from penguins
-where island in ('Biscoe','Dream');
+	genero,
+	pais,
+	idioma
+from cancion
+where pais in ('Reino Unido','España');
 ```
-
 Resultado:
 
-| species   | island | sex    |
-| --------- | ------ | ------ |
-| Adelie    | Biscoe | FEMALE |
-| Adelie    | Biscoe | MALE   |
-| Adelie    | Dream  | FEMALE |
-| Adelie    | Dream  | MALE   |
-| Adelie    | Dream  |        |
-| Chinstrap | Dream  | FEMALE |
-| Chinstrap | Dream  | MALE   |
-| Gentoo    | Biscoe | FEMALE |
-| Gentoo    | Biscoe | MALE   |
-| Gentoo    | Biscoe |        |
+| genero | pais        | idioma |
+| ------ | ----------- | ------ |
+| Rock   | Reino Unido | EN     |
+| Pop    | Reino Unido |        |
+| Rock   | Reino Unido |        |
+| Rock   | España      | ES     |
+| Rock   | España      |        |
+| Rock   | España      | EN     |
+| Pop    | Reino Unido | EN     |
+| Pop    | España      | ES     |
+| Rap    | Reino Unido | EN     |
+| Rap    | España      | ES     |
+| Rap    | España      |        |
 
 - **IN** comprueba si un valor se encuentra en una lista de valores
-- **NOT IN** excluye valores pero cuidado con los NULL
+- **NOT IN** comprueba si un valor no se encuentra en una lista, cuidado con el manejo de los valores NULL
 - Mejora la legibilidad con respecto a múltiples condiciones OR.
 - Puede tener un impacto negativo en el rendimiento con listas muy largas (evitar su uso en estos casos)
 
@@ -124,34 +126,33 @@ Resultado:
 Código SQL:
 ```sql
 select
-	species,
-	island,
-	sex,
-	body_mass_g,
+	titulo,
+	genero,
+	idioma,
+	duracion,
 	case
-		when body_mass_g < 3650 then 'light'
-		when body_mass_g between 3650 and 4500 then 'medium_weight'
-		when body_mass_g > 4500 then 'heavy'
-		else 'unknown weight'
-	end as weight_class
-from penguins
+		when duracion < 200 then 'corta'
+		when duracion between 200 and 300 then 'media'
+		when duracion > 300 then 'larga'
+		else 'duracion desconocida'
+	end as tipo_duracion
+from cancion
 limit 10;
 ```
-
 Resultado:
 
-| species | island    | sex    | body_mass_g | weight_class   |
-| ------- | --------- | ------ | ----------- | -------------- |
-| Adelie  | Torgersen | MALE   | 3750        | medium_weight  |
-| Adelie  | Torgersen | FEMALE | 3800        | medium_weight  |
-| Adelie  | Torgersen | FEMALE | 3250        | light          |
-| Adelie  | Torgersen |        |             | unknown weight |
-| Adelie  | Torgersen | FEMALE | 3450        | light          |
-| Adelie  | Torgersen | MALE   | 3650        | medium_weight  |
-| Adelie  | Torgersen | FEMALE | 3625        | light          |
-| Adelie  | Torgersen | MALE   | 4675        | heavy          |
-| Adelie  | Torgersen |        | 3475        | light          |
-| Adelie  | Torgersen |        | 4250        | medium_weight  |
+| titulo                     | genero | idioma | duracion | tipo_duracion |
+| -------------------------- | ------ | ------ | -------- | ------------- |
+| Bohemian Rhapsody          | Rock   | EN     | 354      | larga         |
+| Somebody to Love           | Rock   | EN     | 296      | media         |
+| Under Pressure             | Rock   | EN     | 248      | media         |
+| Blinding Lights            | Pop    | EN     | 200      | media         |
+| Love Story                 | Pop    | EN     | 235      | media         |
+| Love Story                 | Pop    |        | 190      | corta         |
+| You're My Best Friend      | Rock   | EN     | 172      | corta         |
+| Don't Stop Me Now          | Rock   | EN     | 209      | media         |
+| We Will Rock You           | Rock   | EN     | 122      | corta         |
+| Another One Bites the Dust | Rock   | EN     | 215      | media         |
 
 CASE WHEN te permite:
 - **Categorizar y clasificar datos** dinámicamente
@@ -162,37 +163,40 @@ CASE WHEN te permite:
 
 ### Ejercicio 2 - CASE WHEN
 
-Escribe una consulta que devuelva las columnas especie (`species`),  isla (`island`), peso (`body_mass_g`) y una nueva columna `fixed_body_mass_kg` que sume 500g a los pingüinos avistados en la isla `Biscoe` y 750g a los de Torgersen y devuelva el valor en kilogramos. El resultado no debe tener resultados repetidos. Limita el resultado a las 20 primeras filas.
+Para emitir una canción en la radio hay que añadirle una cuña publicitaria. Escribe una consulta que devuelva las columnas título (`titulo`), país (`pais`), duración (`duracion`) y una nueva columna `duracion_radio_min` que sume 30 segundos a las canciones publicadas en `Reino Unido` y 45 segundos a las publicadas en `España` y devuelva el valor en minutos redondeado a dos decimales. El resultado no debe tener resultados repetidos y debe mostrar las canciones más largas primero. Limita el resultado a las 20 primeras filas.
 
 Solución:
 ```sql
+
 
 ```
 
 Resultado:
 
-| species | island    | body_mass_g | fixed_body_mass_kg |
-| ------- | --------- | ----------- | ------------------ |
-| Adelie  | Torgersen | 3750        | 4.5                |
-| Adelie  | Torgersen | 3800        | 4.55               |
-| Adelie  | Torgersen | 3250        | 4                  |
-| Adelie  | Torgersen |             |                    |
-| Adelie  | Torgersen | 3450        | 4.2                |
-| Adelie  | Torgersen | 3650        | 4.4                |
-| Adelie  | Torgersen | 3625        | 4.375              |
-| Adelie  | Torgersen | 4675        | 5.425              |
-| Adelie  | Torgersen | 3475        | 4.225              |
-| Adelie  | Torgersen | 4250        | 5                  |
-| Adelie  | Torgersen | 3300        | 4.05               |
-| Adelie  | Torgersen | 3700        | 4.45               |
-| Adelie  | Torgersen | 3200        | 3.95               |
-| Adelie  | Torgersen | 4400        | 5.15               |
-| Adelie  | Torgersen | 4500        | 5.25               |
-| Adelie  | Torgersen | 3325        | 4.075              |
-| Adelie  | Torgersen | 4200        | 4.95               |
-| Adelie  | Biscoe    | 3400        | 3.9                |
-| Adelie  | Biscoe    | 3600        | 4.1                |
-| Adelie  | Biscoe    | 3800        | 4.3                |
+|          titulo          |      pais      | duracion | duracion_radio_min |
+|--------------------------|----------------|----------|--------------------|
+| Hey Jude                 | Reino Unido    | 431      | 7.68               |
+| Hotel California         | Estados Unidos | 391      |                    |
+| Heroes                   | Reino Unido    | 371      | 6.68               |
+| Entre dos tierras        | España         | 369      | 6.9                |
+| Thriller                 | Estados Unidos | 357      |                    |
+| Sweet Child O' Mine      | Estados Unidos | 356      |                    |
+| Bohemian Rhapsody        | Reino Unido    | 354      | 6.4                |
+| Corazón partío           | España         | 349      | 6.57               |
+| Like a Prayer            | Estados Unidos | 339      |                    |
+| Lose Yourself            | Estados Unidos | 326      |                    |
+| Space Oddity             | Reino Unido    | 315      | 5.75               |
+| Copenhague               | España         | 313      | 5.97               |
+| Stronger                 | Estados Unidos | 312      |                    |
+| Smells Like Teen Spirit  | Estados Unidos | 301      |                    |
+| So payaso                | España         | 300      | 5.75               |
+| Somebody to Love         | Reino Unido    | 296      | 5.43               |
+| Billie Jean              | Estados Unidos | 294      |                    |
+| Without Me               | Estados Unidos | 290      |                    |
+| Don't Look Back in Anger | Reino Unido    | 288      | 5.3                |
+| Someone Like You         | Reino Unido    | 285      | 5.25               |
+
+- Observa que las canciones de Estados Unidos no encajan en ningún `when` y, como no hay `else`, la nueva columna queda vacía (NULL).
 
 ---
 
@@ -213,82 +217,87 @@ Resultado:
 Código SQL:
 ```sql
 select
-    flipper_length_mm / 10.0 as flipper_cm,
-    body_mass_g / 1000.0 as weight_kg,
-    island as where_found
-from penguins
-limit 5;
+    duracion / 60.0 as minutos,
+    reproducciones / 1000000.0 as millones_reproducciones,
+    pais as donde_publicada
+from cancion
+limit 6;
 ```
 Salida:
 
-| flipper_cm | weight_kg | where_found |
-|------------|-----------|-------------|
-| 18.1       | 3.75      | Torgersen   |
-| 18.6       | 3.8       | Torgersen   |
-| 19.5       | 3.25      | Torgersen   |
-|            |           | Torgersen   |
-| 19.3       | 3.45      | Torgersen   |
+| minutos            | millones_reproducciones | donde_publicada |
+| ------------------ | ----------------------- | --------------- |
+| 5.9                | 2154.0                  | Reino Unido     |
+| 4.93333333333333  | 608.139                 | Reino Unido     |
+| 4.13333333333333  | 44.11                   | Reino Unido     |
+| 3.33333333333333 | 4312.0                  | Estados Unidos  |
+| 3.91666666666667 | 201.611                 | Estados Unidos  |
+| 3.16666666666667 |                         | Reino Unido     |
 
 - SQL utiliza un valor especial nulo (null) para representar datos no especificados
     - No es 0 ni una cadena vacía, sino “No sé”
-- No se conoce la longitud de la aleta ni el peso corporal de uno de los primeros cinco pingüinos
+- No se conocen las reproducciones de una de las seis primeras canciones (la segunda *Love Story*, de la que solo sabemos la duración)
 - Hay que tener especial cuidado con estos valores cuando se usan operadores o funciones
-	- “No sé” dividido entre 10 o 1000 es “No sé”
+	- “No sé” dividido entre 60 o 1.000.000 es “No sé”
 
 ---
 
 ### Igualdad y desigualdad con valores NULL
 
-Tomemos una consulta que devuelve valores nulos en la columna `sex`. Código SQL:
+Tomemos una consulta que devuelve valores nulos en la columna `idioma`. Código SQL:
 ```sql
 select distinct
-    species,
-    sex,
-    island
-from penguins
-where island = 'Biscoe';
+    genero,
+    idioma,
+    pais
+from cancion
+where pais = 'Estados Unidos';
 ```
 Salida:
 
-| species |  sex   | island |
-|---------|--------|--------|
-| Adelie  | FEMALE | Biscoe |
-| Adelie  | MALE   | Biscoe |
-| Gentoo  | FEMALE | Biscoe |
-| Gentoo  | MALE   | Biscoe |
-| Gentoo  |        | Biscoe |
+| genero | idioma | pais           |
+| ------ | ------ | -------------- |
+| Pop    | EN     | Estados Unidos |
+| Rock   | EN     | Estados Unidos |
+| Rock   |        | Estados Unidos |
+| Pop    | ES     | Estados Unidos |
+| Rap    | EN     | Estados Unidos |
+| Rap    |        | Estados Unidos |
+| Rap    | ES     | Estados Unidos |
+| Pop    |        | Estados Unidos |
 
-Si filtramos los datos obtenidos para obtener solo los pingüinos hembra (FEMALE), la fila sin valor en la columna sexo (sex) desaparece. Código SQL:
+Si filtramos los datos obtenidos para obtener solo las canciones en español (ES), las filas sin valor en la columna idioma (`idioma`) desaparecen. Código SQL:
 ```sql
 select distinct
-    species,
-    sex,
-    island
-from penguins
-where island = 'Biscoe' and sex = 'FEMALE';
+    genero,
+    idioma,
+    pais
+from cancion
+where pais = 'Estados Unidos' and idioma = 'ES';
 ```
 Salida:
 
-| species |  sex   | island |
-|---------|--------|--------|
-| Adelie  | FEMALE | Biscoe |
-| Gentoo  | FEMALE | Biscoe |
+| genero | idioma | pais           |
+| ------ | ------ | -------------- |
+| Pop    | ES     | Estados Unidos |
+| Rap    | ES     | Estados Unidos |
 
-Pero es que si filtramos los datos obtenidos para obtener solo los pingüinos que NO son hembra (FEMALE), la fila sin valor en la columna sexo (sex) TAMBIÉN desaparece esa fila. Código SQL:
+Pero es que si filtramos los datos obtenidos para obtener solo las canciones que NO están en español (ES), las filas sin valor en la columna idioma (`idioma`) TAMBIÉN desaparecen. Código SQL:
 ```sql
 select distinct
-    species,
-    sex,
-    island
-from penguins
-where island = 'Biscoe' and sex != 'FEMALE';
+    genero,
+    idioma,
+    pais
+from cancion
+where pais = 'Estados Unidos' and idioma != 'ES';
 ```
 Salida:
 
-| species | sex  | island |
-|---------|------|--------|
-| Adelie  | MALE | Biscoe |
-| Gentoo  | MALE | Biscoe |
+| genero | idioma | pais           |
+| ------ | ------ | -------------- |
+| Pop    | EN     | Estados Unidos |
+| Rock   | EN     | Estados Unidos |
+| Rap    | EN     | Estados Unidos |
 
 ---
 
@@ -302,7 +311,7 @@ Salida:
 
 | null = null |
 |-------------|
-|             |
+|             |
 
 Código SQL:
 ```sql
@@ -322,7 +331,7 @@ Salida:
 | ---- | ----- | ----- | ---- |
 | X    | true  | false | null |
 | Y    | false | true  | null |
-| null | null  | null  | null | 
+| null | null  | null  | null |
 
 ---
 
@@ -331,27 +340,25 @@ Salida:
 Código SQL:
 ```sql
 select
-    species,
-    sex,
-    island
-from penguins
-where sex is null;
+    titulo,
+    idioma,
+    pais
+from cancion
+where idioma is null;
 ```
 Salida:
 
-| species | sex |  island   |
-|---------|-----|-----------|
-| Adelie  |     | Torgersen |
-| Adelie  |     | Torgersen |
-| Adelie  |     | Torgersen |
-| Adelie  |     | Torgersen |
-| Adelie  |     | Torgersen |
-| Adelie  |     | Dream     |
-| Gentoo  |     | Biscoe    |
-| Gentoo  |     | Biscoe    |
-| Gentoo  |     | Biscoe    |
-| Gentoo  |     | Biscoe    |
-| Gentoo  |     | Biscoe    |
+| titulo             | idioma | pais           |
+| ------------------ | ------ | -------------- |
+| Love Story         |        | Reino Unido    |
+| Space Oddity       |        | Reino Unido    |
+| Everlong           |        | Estados Unidos |
+| Copenhague         |        | España         |
+| Rehab              |        | Reino Unido    |
+| Stronger           |        | Estados Unidos |
+| Basureta           |        | España         |
+| Pista sin título 1 |        | Reino Unido    |
+| Pista sin título 2 |        | Estados Unidos |
 
 - Usa los operadores `is null` e `is not null` para manejar valores nulos de manera segura
 - Otras partes de SQL manejan valores nulos de manera especial
@@ -360,55 +367,55 @@ Salida:
 
 ### Ejercicio 3 - Valores nulos
 
-Escribe una consulta para encontrar pingüinos (penguins) cuya masa corporal (body_mass_g) se conoce pero cuyo sexo (sex) se desconoce.
+Escribe una consulta para encontrar las canciones (`cancion`) cuya duración (`duracion`) se conoce pero cuyo idioma (`idioma`) se desconoce.
 
 Solución:
 ```sql
+
 
 ```
 
 Resultado:
 
-| species | island    | bill_length_mm | bill_depth_mm | flipper_length_mm | body_mass_g | sex |
-| ------- | --------- | -------------- | ------------- | ----------------- | ----------- | --- |
-| Adelie  | Torgersen | 34.1           | 18.1          | 193               | 3475        |     |
-| Adelie  | Torgersen | 42             | 20.2          | 190               | 4250        |     |
-| Adelie  | Torgersen | 37.8           | 17.1          | 186               | 3300        |     |
-| Adelie  | Torgersen | 37.8           | 17.3          | 180               | 3700        |     |
-| Adelie  | Dream     | 37.5           | 18.9          | 179               | 2975        |     |
-| Gentoo  | Biscoe    | 44.5           | 14.3          | 216               | 4100        |     |
-| Gentoo  | Biscoe    | 46.2           | 14.4          | 214               | 4650        |     |
-| Gentoo  | Biscoe    | 47.3           | 13.8          | 216               | 4725        |     |
-| Gentoo  | Biscoe    | 44.5           | 15.7          | 217               | 4875        |     |
+| id_cancion | titulo       | genero | pais           | idioma | duracion | anio | reproducciones | me_gusta | valoracion |
+| ---------- | ------------ | ------ | -------------- | ------ | -------- | ---- | -------------- | -------- | ---------- |
+| 6          | Love Story   | Pop    | Reino Unido    |        | 190      |      |                |          |            |
+| 12         | Space Oddity | Rock   | Reino Unido    |        | 315      | 1969 | 3146000        | 116362   | 3.2        |
+| 24         | Everlong     | Rock   | Estados Unidos |        | 250      | 1997 | 790776000      | 32095119 | 3.6        |
+| 29         | Copenhague   | Rock   | España         |        | 313      | 2008 | 1974000        | 43408    | 2.6        |
+| 38         | Rehab        | Pop    | Reino Unido    |        | 215      | 2006 | 12830000       | 145535   | 3.2        |
+| 60         | Stronger     | Rap    | Estados Unidos |        | 312      | 2007 | 5705000        | 103635   | 4.8        |
+| 70         | Basureta     | Rap    | España         |        | 277      | 2016 | 13214000       | 188239   | 4.5        |
 
 ---
 
 ### Reemplaza NULL por un valor con significado
 
 ```sql
-select 
-	species,
-	island,
-	sex,
-	coalesce(sex,'not available') as sex_report
-from penguins
-limit 10;
+select
+	titulo,
+	pais,
+	idioma,
+	coalesce(idioma,'no disponible') as idioma_informe
+from cancion
+limit 12;
 ```
-
 Resultado:
 
-| species | island    | sex    | sex_report    | 
-| ------- | --------- | ------ | ------------- |
-| Adelie  | Torgersen | MALE   | MALE          |
-| Adelie  | Torgersen | FEMALE | FEMALE        |
-| Adelie  | Torgersen | FEMALE | FEMALE        |
-| Adelie  | Torgersen |        | not available |
-| Adelie  | Torgersen | FEMALE | FEMALE        |
-| Adelie  | Torgersen | MALE   | MALE          |
-| Adelie  | Torgersen | FEMALE | FEMALE        |
-| Adelie  | Torgersen | MALE   | MALE          |
-| Adelie  | Torgersen |        | not available |
-| Adelie  | Torgersen |        | not available |
+| titulo                     | pais           | idioma | idioma_informe |
+| -------------------------- | -------------- | ------ | -------------- |
+| Bohemian Rhapsody          | Reino Unido    | EN     | EN             |
+| Somebody to Love           | Reino Unido    | EN     | EN             |
+| Under Pressure             | Reino Unido    | EN     | EN             |
+| Blinding Lights            | Estados Unidos | EN     | EN             |
+| Love Story                 | Estados Unidos | EN     | EN             |
+| Love Story                 | Reino Unido    |        | no disponible  |
+| You're My Best Friend      | Reino Unido    | EN     | EN             |
+| Don't Stop Me Now          | Reino Unido    | EN     | EN             |
+| We Will Rock You           | Reino Unido    | EN     | EN             |
+| Another One Bites the Dust | Reino Unido    | EN     | EN             |
+| Heroes                     | Reino Unido    | EN     | EN             |
+| Space Oddity               | Reino Unido    |        | no disponible  |
 
 - Con esta función puedes reemplazar NULL en una consulta por un valor con significado.
 - La función `COALESCE(x,y,...)` toma cualquier número de parámetros y devuelve el valor del primer parámetro que no es nulo (NULL).
@@ -417,7 +424,7 @@ Resultado:
 	- **Evita la propagación de NULL** en los cálculos
 	- **Proporciona alternativas elegantes** para datos faltantes
 	- **Simplifica las sentencias CASE** que de otro modo verificarían NULL
-	- **Mejora la completitud de los datos** en los reportes
+	- **Mejora la completitud de los datos** en los informes
 	- **Habilita lógica flexible de valores predeterminados** sin condicionales complejos
 
 ---
@@ -425,30 +432,30 @@ Resultado:
 ### Reemplaza un valor por NULL
 
 ```sql
-select 
-	body_mass_g,
-	round(flipper_length_mm/NULLIF(body_mass_g - 2700,0),1) as flipper_ratio
-from penguins
-where body_mass_g < 3000
-order by flipper_ratio;
+select
+	titulo,
+	reproducciones,
+	round(me_gusta * 100.0 / NULLIF(reproducciones, 0), 1) as porcentaje_me_gusta
+from cancion
+where reproducciones < 1000000
+order by porcentaje_me_gusta;
 ```
-
 Resultado:
 
-| body_mass_g | flipper_ratio |
-| ----------- | ------------- |
-| 2700        |               |
-| 2975        | 0.7           |
-| 2900        | 0.9           |
-| 2900        | 0.9           |
-| 2925        | 0.9           |
-| 2900        | 0.9           |
-| 2900        | 0.9           |
-| 2850        | 1.2           |
-| 2850        | 1.2           |
+| titulo          | reproducciones | porcentaje_me_gusta |
+| --------------- | -------------- | ------------------- |
+| Primer single   | 0              |                     |
+| Corazón partío  | 734000         | 0.9                 |
+| Yellow          | 369000         | 1.1                 |
+| Like a Prayer   | 392000         | 2.0                 |
+| Mala mujer      | 222000         | 2.4                 |
+| Bodak Yellow    | 158000         | 3.6                 |
+| Save Your Tears | 100000         | 3.8                 |
+| Malamente       | 235000         | 4.3                 |
+| Starboy         | 232000         | 4.9                 |
 
-- La función `NULLIF(x, y)` devolverá NULL si el valor de x es el mismo que el de y, sino devolverá el valor x. 
-	- Observa la primera fila, debería dar ERROR al dividir por cero
+- La función `NULLIF(x, y)` devolverá NULL si el valor de x es el mismo que el de y, sino devolverá el valor x.
+	- Observa la primera fila: *Primer single* es un estreno con 0 reproducciones, y debería dar ERROR al dividir por cero
 - En ocasiones, es conveniente reemplazar valores por un valor nulo:
 	- Para **evitar divisiones por cero**
 	- **Eliminar el uso de cadenas vacías** (u otros valores comodines) en los datos
@@ -460,27 +467,28 @@ Resultado:
 
 ### Ejercicio 4 - Manejar valores nulos
 
-Escribe una consulta que devuelva todas las columnas de pingüinos y añada una columna nueva (first_measure) que contenga el primer valor no nulo de las medidas de un pingüino en este orden: bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g. Si todas tienen valor nulo, entonces devolverá el valor -1. Limita el resultado a las 10 primeras filas.
+Escribe una consulta que devuelva todas las columnas de las canciones y añada una columna nueva (`primer_dato`) que contenga el primer valor no nulo de las cifras de una canción en este orden: `duracion`, `reproducciones`, `me_gusta`, `valoracion`. Si todas tienen valor nulo, entonces devolverá el valor -1. Ordena el resultado por `id_cancion` descendente (las fichas vacías son las últimas que se añadieron) y limita el resultado a las 10 primeras filas.
 
 Solución:
 ```sql
+
 
 ```
 
 Resultado:
 
-| species | island    | bill_length_mm | bill_depth_mm | flipper_length_mm | body_mass_g | sex    | first_measure |
-| ------- | --------- | -------------- | ------------- | ----------------- | ----------- | ------ | ------------- |
-| Adelie  | Torgersen | 39.1           | 18.7          | 181               | 3750        | MALE   | 39.1          |
-| Adelie  | Torgersen | 39.5           | 17.4          | 186               | 3800        | FEMALE | 39.5          |
-| Adelie  | Torgersen | 40.3           | 18            | 195               | 3250        | FEMALE | 40.3          |
-| Adelie  | Torgersen |                |               |                   |             |        | -1            |
-| Adelie  | Torgersen | 36.7           | 19.3          | 193               | 3450        | FEMALE | 36.7          |
-| Adelie  | Torgersen | 39.3           | 20.6          | 190               | 3650        | MALE   | 39.3          |
-| Adelie  | Torgersen | 38.9           | 17.8          | 181               | 3625        | FEMALE | 38.9          |
-| Adelie  | Torgersen | 39.2           | 19.6          | 195               | 4675        | MALE   | 39.2          |
-| Adelie  | Torgersen | 34.1           | 18.1          | 193               | 3475        |        | 34.1          |
-| Adelie  | Torgersen | 42             | 20.2          | 190               | 4250        |        | 42            |
+| id_cancion | titulo                  | genero | pais           | idioma | duracion | anio | reproducciones | me_gusta | valoracion | primer_dato |
+| ---------- | ----------------------- | ------ | -------------- | ------ | -------- | ---- | -------------- | -------- | ---------- | ----------- |
+| 74         | Pista sin título 2      | Pop    | Estados Unidos |        |          |      |                |          |            | -1          |
+| 73         | Pista sin título 1      | Rock   | Reino Unido    |        |          |      |                |          |            | -1          |
+| 72         | Primer single           | Rock   | España         | ES     | 201      | 2026 | 0              | 0        |            | 201         |
+| 71         | Efectos vocales         | Rap    | España         | ES     | 229      | 2005 | 320282000      | 16154999 | 4.6        | 229         |
+| 70         | Basureta                | Rap    | España         |        | 277      | 2016 | 13214000       | 188239   | 4.5        | 277         |
+| 69         | Quédate                 | Rap    | España         | ES     | 204      | 2022 | 1105000000     | 35714063 | 3.3        | 204         |
+| 68         | Tú me dejaste de querer | Rap    | España         | ES     | 213      | 2020 | 1443000        | 48882    | 4.5        | 213         |
+| 67         | Mala mujer              | Rap    | España         | ES     | 191      | 2017 | 222000         | 5295     | 3.4        | 191         |
+| 66         | Woman                   | Rap    | Reino Unido    | EN     | 263      | 2021 | 5198000        | 156555   | 3.5        | 263         |
+| 65         | Location                | Rap    | Reino Unido    | EN     | 243      | 2019 | 1618023000     | 26439006 | 4.6        | 243         |
 
 
 ---
@@ -489,25 +497,21 @@ Resultado:
 
 Al principio de la lección vimos el operador `IN`. Ahora que conocemos la lógica ternaria, podemos entender un comportamiento sorprendente de su negación, `NOT IN`, cuando hay valores NULL de por medio.
 
-Código SQL:
-
 ```sql
 select 2 in (1, 2, null) as dos_en_lista;
 ```
 
-Salida:
+Resultado:
 
 | dos_en_lista |
 | ------------ |
 | 1            | 
 
-Código SQL:
-
 ```sql
 select 3 not in (1, 2, null) as tres_no_en_lista;
 ```
 
-Salida:
+Resultado:
 
 | tres_no_en_lista |
 | ---------------- |
@@ -526,65 +530,65 @@ Salida:
 
 ---
 
-### La trampa de NOT IN en acción
+### ### La trampa de NOT IN en acción
 
-Comprobemos el efecto sobre la tabla `penguins` (168 machos, 165 hembras y 11 con sexo desconocido):
+Comprobemos el efecto sobre la tabla `cancion` (47 canciones en inglés, 18 en español y 9 con idioma desconocido):
 
 Código SQL:
 
 ```sql
-select count(*) as no_machos
-from penguins
-where sex not in ('MALE');
+select count(*) as no_ingles
+from cancion
+where idioma not in ('EN');
 ```
 
 Salida:
 
-| no_machos |
+| no_ingles |
 | --------- |
-| 165       | 
+| 18        | 
 
 Código SQL:
 
 ```sql
-select count(*) as no_machos
-from penguins
-where sex not in ('MALE', null);
+select count(*) as no_ingles
+from cancion
+where idioma not in ('EN', null);
 ```
 
 Salida:
 
-| no_machos |
+| no_ingles |
 | --------- |
 | 0         | 
 
 Observa dos cosas:
 
-1. En la primera consulta, los 11 pingüinos de sexo desconocido **tampoco cuentan** (165, no 176): su comparación `NULL != 'MALE'` es `NULL` y no pasan el filtro. Es el mismo comportamiento que ya vimos con `!=`.
+1. En la primera consulta, las 9 canciones de idioma desconocido **tampoco cuentan** (18, no 27): su comparación `NULL != 'EN'` es `NULL` y no pasan el filtro. Es el mismo comportamiento que ya vimos con `!=`.
 2. En la segunda, basta **un solo NULL en la lista** para que el resultado sea vacío. Aquí el NULL está escrito a mano y salta a la vista pero, cuando veamos subconsultas, la lista del `NOT IN` vendrá calculada de otra tabla y el NULL puede colarse **sin que lo veas**. Es uno de los errores más difíciles de depurar en SQL.
 
 **Cómo protegerse**:
 
-- Si quieres incluir los NULL en el resultado, sé explícito: `where sex not in ('MALE') or sex is null`
-- O elimina los NULL antes de comparar: `where coalesce(sex, 'unknown') not in ('MALE')`
+- Si quieres incluir los NULL en el resultado, sé explícito: `where idioma not in ('EN') or idioma is null`
+- O elimina los NULL antes de comparar: `where coalesce(idioma, 'desconocido') not in ('EN')`
 - Cuando la lista venga de una subconsulta (lo veremos más adelante), garantiza que no contenga NULL (`... where columna is not null`) o usa `NOT EXISTS`
 
 ---
 
 ### Ejercicio 5 - NOT IN y NULL
 
-Escribe una consulta que cuente los pingüinos que **no** son machos, contando también aquellos cuyo sexo se desconoce.
+Escribe una consulta que cuente las canciones que **no** están en inglés, contando también aquellas cuyo idioma se desconoce.
 
 Solución:
-```sql
 
+```sql
 ```
 
 Resultado:
-
-| no_machos |
+ 
+| no_ingles |
 | --------- |
-| 176       |
+| 27        | 
 
 ---
 
@@ -601,14 +605,14 @@ Resultado:
 
 Código SQL:
 ```sql
-select sum(body_mass_g) as total_mass
-from penguins;
+select sum(reproducciones) as total_reproducciones
+from cancion;
 ```
 Salida:
 
-| total_mass |
-|------------|
-| 1437000.0  |
+| total_reproducciones |
+| -------------------- |
+| 39592661000          |
 
 - Una función de agregación **combina muchos valores para producir un solo valor**
 - La suma es una función de agregación o de grupo
@@ -621,20 +625,20 @@ Salida:
 Código SQL:
 ```sql
 select
-    max(bill_length_mm) as longest_bill,
-    min(flipper_length_mm) as shortest_flipper,
-    avg(bill_length_mm) / avg(bill_depth_mm) as weird_ratio
-from penguins;
+    max(duracion) as mas_larga,
+    min(duracion) as mas_corta,
+    avg(me_gusta) / avg(reproducciones) as ratio_raro
+from cancion;
 ```
 Salida:
 
-| longest_bill | shortest_flipper |   weird_ratio    |
-|--------------|------------------|------------------|
-| 59.6         | 172.0            | 2.56087082530644 |
+| mas_larga | mas_corta | ratio_raro         |
+| --------- | --------- | ------------------ |
+| 431       | 122       | 0.0376337567207215 | 
 
-- `max`, `min`y `avg`son otras funciones de agregación en SQL
+- `max`, `min`y `avg` son otras funciones de agregación en SQL
 - En realidad, esto no debería funcionar: no se puede calcular el máximo ni el promedio si algún valor es nulo.
-    - Consulta todos los valores de la tabla para comprobar la existencia de valores nulos
+    - Consulta todos los valores de la tabla para comprobar la existencia de valores nulos (hay canciones sin duración ni reproducciones)
 - SQL hace lo que es útil en lugar de lo que es correcto
 	- Ignora las filas con valores nulos
 
@@ -645,36 +649,37 @@ Salida:
 
 ### Ejercicio 6 - Funciones agregación
 
-¿Cuál es la masa corporal promedio de los pingüinos que pesan más de 3000,0 gramos?
+¿Cuál es el número medio de reproducciones de las canciones que tienen más de un millón de reproducciones?
 
 Solución:
 ```sql
+
 
 ```
 
 Resultado:
 
-| avg(body_mass_g)  |
-| ----------------- |
-| 4245.015105740181 |
+| avg(reproducciones) |
+| ------------------- |
+| 638551919.354839   |
 
 ---
 
-### Contar 
+### Contar
 
 Código SQL:
 ```sql
 select
-    count(*) as count_star,
-    count(sex) as count_specific,
-    count(distinct sex) as count_distinct
-from penguins;
+    count(*) as count_star,
+    count(idioma) as count_specific,
+    count(distinct idioma) as count_distinct
+from cancion;
 ```
 Salida:
 
 | count_star | count_specific | count_distinct |
-|------------|----------------|----------------|
-| 344        | 333            | 2              |
+| ---------- | -------------- | -------------- |
+| 74         | 65             | 2              |
 
 - `count(*)` cuenta las filas, tiene en cuenta los valores nulos
 - `count(column)` cuenta las entradas (valores) no nulas de una columna
@@ -682,19 +687,21 @@ Salida:
 
 ---
 
-### Ejercicio 7 - Contar 
+### Ejercicio 7 - Contar
 
-¿Cuántas masas corporales (body_mass_g) diferentes hay en el conjunto de datos de pingüinos?
+¿Cuántos años de publicación (`anio`) diferentes hay en el conjunto de datos de canciones?
 
 Solución:
 ```sql
 
+
 ```
 
 Resultado:
-| body_distinct |
-| ------------- |
-| 94            |
+
+| anios_distintos |
+| --------------- |
+| 39              |
 
 ---
 
@@ -703,22 +710,23 @@ Resultado:
 Código SQL:
 ```sql
 select
-    sex,
-    avg(body_mass_g) as average_mass_g
-from penguins
-group by sex;
+    idioma,
+    avg(reproducciones) as media_reproducciones
+from cancion
+group by idioma;
 ```
 Salida:
 
-|  sex   |  average_mass_g  |
-|--------|------------------|
-|        | 4005.55555555556 |
-| FEMALE | 3862.27272727273 |
-| MALE   | 4545.68452380952 |
+| idioma | media_reproducciones |
+| ------ | -------------------- |
+|        | 137940833.333333     |
+| EN     | 691769319.148936     |
+| ES     | 347325444.444444     | 
 
 - Coloca las filas en grupos según distintas combinaciones de valores en las columnas especificadas con `group by`
 - Luego realiza la agregación por separado para cada grupo
-- Todas las filas de cada grupo tienen el mismo valor para el sexo (`sex`), por lo que no es necesario agregarlas
+- Todas las filas de cada grupo tienen el mismo valor para el idioma (`idioma`), por lo que no es necesario agregarlas
+- Observa que las canciones sin idioma forman **su propio grupo** (la primera fila): `group by` trata todos los nulos como si fueran el mismo valor
 
 ---
 
@@ -727,22 +735,22 @@ Salida:
 Código SQL:
 ```sql
 select
-    sex,
-    body_mass_g
-from penguins
-group by sex;
+    idioma,
+    reproducciones
+from cancion
+group by idioma;
 ```
 Salida:
 
-|  sex   | body_mass_g |
-|--------|-------------|
-|        |             |
-| FEMALE | 3800.0      |
-| MALE   | 3750.0      |
+| idioma | reproducciones |
+| ------ | -------------- |
+|        |                |
+| EN     | 2154000000     |
+| ES     | 25164000       |
 
 - Si no especificamos cómo agregar una columna, SQLite elige cualquier valor arbitrario del grupo
-    - Todos los pingüinos de cada grupo tienen el mismo sexo porque los agrupamos por eso, por lo que obtenemos la respuesta correcta
-    - Los valores de masa corporal están en los datos, pero son impredecibles
+    - Todas las canciones de cada grupo tienen el mismo idioma porque las agrupamos por eso, por lo que obtenemos la respuesta correcta
+    - Los valores de reproducciones están en los datos, pero son impredecibles
     - Es un error común
 - Otros gestores de bases de datos no hacen esto
     - Por ejemplo, PostgreSQL se queja de que la columna debe usarse en una función de agregación
@@ -751,112 +759,58 @@ Salida:
 
 ### Ejercicio 8 - Agrupar
 
-Escriba una consulta que muestre cada masa corporal (body_mass_g) distinta en el conjunto de datos de pingüinos y la cantidad de pingüinos que pesan esa cantidad.
+Escribe una consulta que muestre cada año de publicación (`anio`) distinto en el conjunto de datos de canciones y la cantidad de canciones publicadas ese año.
 
 Solución:
 ```sql
+
 
 ```
 
 Resultado:
 
-| body_mass_g | number_same_weight |
-| ----------- | ------------------ |
-|             | 2                  |
-| 2700        | 1                  |
-| 2850        | 2                  |
-| 2900        | 4                  |
-| 2925        | 1                  |
-| 2975        | 1                  |
-| 3000        | 2                  |
-| 3050        | 4                  |
-| 3075        | 1                  |
-| 3100        | 1                  |
-| 3150        | 4                  |
-| 3175        | 2                  |
-| 3200        | 5                  |
-| 3250        | 5                  |
-| 3275        | 1                  |
-| 3300        | 6                  |
-| 3325        | 5                  |
-| 3350        | 5                  |
-| 3400        | 8                  |
-| 3425        | 2                  |
-| 3450        | 8                  |
-| 3475        | 3                  |
-| 3500        | 7                  |
-| 3525        | 2                  |
-| 3550        | 9                  |
-| 3575        | 1                  |
-| 3600        | 7                  |
-| 3625        | 1                  |
-| 3650        | 6                  |
-| 3675        | 2                  |
-| 3700        | 11                 |
-| 3725        | 3                  |
-| 3750        | 5                  |
-| 3775        | 4                  |
-| 3800        | 12                 |
-| 3825        | 1                  |
-| 3850        | 1                  |
-| 3875        | 1                  |
-| 3900        | 10                 |
-| 3950        | 10                 |
-| 3975        | 1                  |
-| 4000        | 5                  |
-| 4050        | 6                  |
-| 4075        | 1                  |
-| 4100        | 5                  |
-| 4150        | 6                  |
-| 4200        | 5                  |
-| 4250        | 5                  |
-| 4275        | 1                  |
-| 4300        | 8                  |
-| 4350        | 2                  |
-| 4375        | 1                  |
-| 4400        | 8                  |
-| 4450        | 5                  |
-| 4475        | 1                  |
-| 4500        | 3                  |
-| 4550        | 2                  |
-| 4575        | 1                  |
-| 4600        | 5                  |
-| 4625        | 2                  |
-| 4650        | 5                  |
-| 4675        | 1                  |
-| 4700        | 6                  |
-| 4725        | 3                  |
-| 4750        | 5                  |
-| 4775        | 1                  |
-| 4800        | 3                  |
-| 4850        | 4                  |
-| 4875        | 3                  |
-| 4900        | 2                  |
-| 4925        | 2                  |
-| 4950        | 2                  |
-| 4975        | 1                  |
-| 5000        | 6                  |
-| 5050        | 3                  |
-| 5100        | 3                  |
-| 5150        | 2                  |
-| 5200        | 4                  |
-| 5250        | 3                  |
-| 5300        | 4                  |
-| 5350        | 3                  |
-| 5400        | 5                  |
-| 5450        | 1                  |
-| 5500        | 5                  |
-| 5550        | 6                  |
-| 5600        | 2                  |
-| 5650        | 3                  |
-| 5700        | 5                  |
-| 5750        | 1                  |
-| 5800        | 2                  |
-| 5850        | 3                  |
-| 5950        | 2                  |
-| 6000        | 2                  |
-| 6050        | 1                  |
-| 6300        | 1                  |
+| anio | canciones_mismo_anio |
+| ---- | -------------------- |
+|      | 3                    |
+| 1968 | 1                    |
+| 1969 | 1                    |
+| 1970 | 1                    |
+| 1975 | 2                    |
+| 1976 | 1                    |
+| 1977 | 3                    |
+| 1978 | 1                    |
+| 1980 | 1                    |
+| 1981 | 1                    |
+| 1982 | 2                    |
+| 1983 | 1                    |
+| 1986 | 1                    |
+| 1987 | 1                    |
+| 1989 | 1                    |
+| 1990 | 1                    |
+| 1991 | 1                    |
+| 1992 | 1                    |
+| 1995 | 1                    |
+| 1996 | 2                    |
+| 1997 | 3                    |
+| 2000 | 1                    |
+| 2002 | 2                    |
+| 2003 | 1                    |
+| 2005 | 1                    |
+| 2006 | 1                    |
+| 2007 | 2                    |
+| 2008 | 2                    |
+| 2010 | 1                    |
+| 2011 | 1                    |
+| 2013 | 1                    |
+| 2014 | 2                    |
+| 2016 | 4                    |
+| 2017 | 5                    |
+| 2018 | 3                    |
+| 2019 | 5                    |
+| 2020 | 3                    |
+| 2021 | 2                    |
+| 2022 | 6                    |
+| 2026 | 1                    |
 
 ---
 
@@ -865,18 +819,17 @@ Resultado:
 Código SQL:
 ```sql
 select
-    sex,
-    avg(body_mass_g) as average_mass_g
-from penguins
-group by sex
-having average_mass_g > 4000.0;
+    idioma,
+    avg(reproducciones) as media_reproducciones
+from cancion
+group by idioma
+having media_reproducciones > 500000000.0;
 ```
 Salida:
 
-| sex  |  average_mass_g  |
-|------|------------------|
-|      | 4005.55555555556 |
-| MALE | 4545.68452380952 |
+| idioma | media_reproducciones |
+| ------ | -------------------- |
+| EN     | 691769319.1489362    |
 
 - Se utiliza la condición de la cláusula `having` en vez de la condición del `where`
 	- Recuerda que la condición del `where`se evalúa fila a fila
@@ -892,21 +845,21 @@ Salida:
 Código SQL:
 ```sql
 select
-    sex,
-    round(
-        avg(body_mass_g) filter (where body_mass_g < 4000.0),
-        1
-    ) as average_mass_g
-from penguins
-group by sex;
+    idioma,
+    round(
+        avg(reproducciones) filter (where reproducciones < 100000000.0),
+        1
+    ) as media_reproducciones
+from cancion
+group by idioma;
 ```
 Salida:
 
-|  sex   | average_mass_g |
-|--------|----------------|
-|        | 3362.5         |
-| FEMALE | 3417.3         |
-| MALE   | 3729.6         |
+| idioma | media_reproducciones |
+| ------ | -------------------- |
+|        | 7373800.0            |
+| EN     | 22238700.0           |
+| ES     | 6413727.3            |
 
 - `filter (where condition)` se aplica a las entradas
 - La cláusula `filter` extiende las funciones agregadas (`sum`, `avg`, `count`, …) mediante una cláusula `where` adicional.
@@ -920,21 +873,22 @@ Salida:
 
 ### Ejercicio 9 - Filtrar valores agregados
 
-Escriba una consulta que cuente el número de pingüinos de cada una de las siguientes categorías:
-	- light si pesa menos de 3650g
-	- heavy si pesa más de 4500g
-	- medium_weight si pesa entre los valores anteriores
+Escribe una consulta que cuente el número de canciones de cada una de las siguientes categorías:
+	- corta si dura menos de 200 segundos
+	- larga si dura más de 300 segundos
+	- media si dura entre los valores anteriores
 
 Solución:
 ```sql
+
 
 ```
 
 Resultado:
 
-| light | medium_weight | heavy |
-| ----- | ------------- | ----- |
-| 98    | 129           | 115   |
+| corta | media | larga |
+| ----- | ----- | ----- |
+| 15    | 43    | 14    |
 
 ---
 
@@ -963,16 +917,22 @@ Este orden de ejecución explica varios comportamientos importantes de SQL:
 Por ejemplo, en esta consulta:
 
 ```sql
-SELECT species, COUNT(*) as view_count
-FROM penguins
-WHERE sex = 'MALE'
-GROUP BY species
-HAVING COUNT(*) > 50
-ORDER BY view_count DESC
+SELECT genero, COUNT(*) as num_canciones
+FROM cancion
+WHERE idioma = 'EN'
+GROUP BY genero
+HAVING COUNT(*) > 10
+ORDER BY num_canciones DESC
 LIMIT 2;
 ```
+Resultado:
 
-El sistema gestor de bases de datos primero filtra los pingüinos (`penguins`) que sean machos (`MALE`), después los agrupa por especie (`specie`), filtra los grupos con más de 50 avistamientos, selecciona las columnas, ordena las filas por número de avistamientos (`view_count`), y finalmente limita los resultados a 2.
+| genero | num_canciones |
+| ------ | ------------- |
+| Rock   | 22            |
+| Pop    | 17            |
+
+El sistema gestor de bases de datos primero filtra las canciones (`cancion`) que están en inglés (`EN`), después las agrupa por género (`genero`), filtra los grupos con más de 10 canciones, selecciona las columnas, ordena las filas por número de canciones (`num_canciones`), y finalmente limita los resultados a 2.
 
 ---
 
@@ -981,6 +941,8 @@ El sistema gestor de bases de datos primero filtra los pingüinos (`penguins`) q
 
 Enhorabuena has llegado al final de la sesión!
 
-![[BD - Well done penguins.png]]
+<img src="http://1.bp.blogspot.com/-WolgaAXg06M/Tz-3rIN1p0I/AAAAAAAAG2M/ip75NZ1wOsM/s1600/Queen+Don%27t+Stop+Me+Now+en+comic+3.jpg" alt="Alt text" style="display: block; margin: 0 auto;" />
 
---- 
+Fuente: [Diego's Tumblr](https://temblorxd.tumblr.com/)
+
+---
