@@ -136,7 +136,7 @@ Hay dos maneras de conseguir que BigER nos muestre el diagrama E/R en notación 
 
 Tanto si lo haces de una forma como de otra ya deberías poder ver así el diagrama:
 
-![](../imgs/BD%20-%20BigER%20Relacion%20Estudiante%20Titulacion%20Crow%20Foot.png)
+![](../imgs/BD%20-%20BigER%20Relacion%20Estudiante%20Titulacion.png)
 
 Como acabamos de ver, aunque BigER admite atributos al describir una relación, no los muestra.
 
@@ -223,7 +223,7 @@ Titulacion[`1..1`] -> Asignatura[`1..N`]
 
 Tras escribir ese texto, deberías poder ver en la ventana del diagrama E/R algo similar a lo que se muestra en la siguiente imagen:
 
-![](../imgs/BD%20-%20BigER%20Relacion%20Estudiante%20Titulacion%20Asignatura%20Crow%20Foot.png)
+![](../imgs/BD%20-%20BigER%20Relacion%20Estudiante%20Titulacion%20Asignatura.png)
 
 Puedes ver como tanto la entidad dependiente Asignatura como la relación débil compuesta_de aparecen con borde negro más grueso para indicar que son débiles. Cuando las dibujemos a mano normalmente usaremos doble borde en lugar de un borde grueso negro para que se distingan mejor.
 
@@ -270,7 +270,7 @@ Estudiante[`0..1`| `"Mentor"`] -> Estudiante[`0..N`|`"Mentorizado"`]
 
 Tras escribir ese texto, deberías poder ver en la ventana del diagrama E/R algo similar a lo que se muestra en la siguiente pantalla
 
-![](../imgs/BD%20-%20BigER%20Relacion%20Estudiante%20Titulacion%20Asignatura%20Mentor%20Crow%20Foot.png)
+![](../imgs/BD%20-%20BigER%20Relacion%20Estudiante%20Titulacion%20Asignatura%20Mentor.png)
 
 Puedes ver como ahora en cada extremo de la relación es_mentor_de aparece el rol tomado en cada extremo de la relación por el Estudiante.
 

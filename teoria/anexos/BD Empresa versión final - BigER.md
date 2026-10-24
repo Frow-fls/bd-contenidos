@@ -23,14 +23,14 @@ sueldo
 ```code
 entity Departamento {
 numero_departamento key
-nombre //UNIQUE
+nombre unique
 }
 ```
 #### Entidad Proyecto
 ```code
 entity Proyecto {
 numero_proyecto key
-nombre //UNIQUE
+nombre unique
 ubicacion
 }
 ```
@@ -60,7 +60,7 @@ horas
 #### Relación controla
 ```code
 relationship controla {
-Proyecto[1..N] -> Departamento[1..1]
+Proyecto[0..N] -> Departamento[1..1]
 }
 ```
 #### Relación supervisa
@@ -104,7 +104,4 @@ Departamento[1..1] -> Ubicacion_Departamento[1..N]
 ---
 ### Diagrama resultante en notación crow's foot
 
-![](../../imgs/BD%20Empresa%20versión%20final%20Crows%20Foot.png)
-
->[!tip] Retoques posteriores del diagrama
->Recuerda que, aunque en la notación textual sí están incluidos los atributos de relación *horas* en *trabaja_en* y *fecha_ingreso_director* en *dirige*, al mostrarlo de forma gráfica no aparecen y se han añadido de forma manual al diagrama. Del mismo modo, el subrayado discontinuo en los atributos *nombre* de *Proyecto* y *nombre* de *Departamento* se ha añadido de forma manual al diagrama para indicar que son atributos de tipo UNIQUE 
+![](../../imgs/BD%20-%20BigER%20Empresa%20version%20final%20correcta.png)

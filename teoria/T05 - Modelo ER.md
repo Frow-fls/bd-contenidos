@@ -4,20 +4,21 @@
 
 tags: #database, #lecture, #entity-relationship
 author: aeprieto
-origin: [“Fundamentos de Sistemas de Bases de Datos”](https://explora.unex.es/discovery/fulldisplay?docid=alma991004714442207611&context=L&vid=34UEX_INST:34UEX&lang=es&search_scope=MyInst_and_CI&adaptor=Local%20Search%20Engine&tab=Everything&query=any,contains,elmasri&sortby=date_d&facet=frbrgroupid,include,9013732198023457128&offset=0). R. Elmasri, R. y S. B. Navathe.  Addison-Wesley, 2008 (5ª edición) + contenido generado por Gemini 2.5 Pro refinado y editado por aeprieto
+origin: [“Fundamentos de Sistemas de Bases de Datos”](https://explora.unex.es/discovery/fulldisplay?docid=alma991004714442207611&context=L&vid=34UEX_INST:34UEX&lang=es&search_scope=MyInst_and_CI&adaptor=Local%20Search%20Engine&tab=Everything&query=any,contains,elmasri&sortby=date_d&facet=frbrgroupid,include,9013732198023457128&offset=0). R. Elmasri y S. B. Navathe.  Addison-Wesley, 2008 (5ª edición) + contenido generado por Gemini 2.5 Pro refinado y editado por aeprieto
 date: 2025-09-22
+last-update: 2026-10-21
 
 ---
 ## Contenidos
 1. Introducción
-2. Los Pilares del Modelo - Entidades y Atributos
+2. Los Pilares del Modelo - Entidades y Atributos.
 3. El Pegamento del Modelo: Relaciones.
 4. El Arte del Buen Diseño - Criterios y Decisiones Clave.
 5. Entidades Débiles: Cuando una Entidad Necesita Ayuda para Identificarse.
 6. Relaciones de Grado Superior (N-arias).
-7. Más Allá del E/R Básico - El Modelo Extendido (EER)
-8. Criterios de Calidad y de Evaluación del Diseño - Principios Fundamentales y Errores a Evitar
-  Anexo I. Resumen BigER
+7. Más Allá del E/R Básico - El Modelo Extendido (EER).
+8. Criterios de Calidad y de Evaluación del Diseño - Principios Fundamentales y Errores a Evitar.
+  Anexo I. Resumen BigER.
 ## 1. Introducción
 ### 1.1. El Origen del Modelo Entidad-Relación: Las Cuestiones Abiertas por el Modelo Relacional
 
@@ -55,7 +56,7 @@ El Modelo Entidad-Relación respondió punto por punto a las tres preguntas de l
 
 La mejor forma de fijar la diferencia es la analogía de construir una casa:
 
-- **El Modelo ER es el plano del arquitecto** — el diseño _conceptual_. Es el primer boceto, y se dibuja hablando con el cliente (los usuarios del negocio). Define las habitaciones (**entidades** como "Cliente" o "Producto"), sus características (**atributos** como "Nombre" o "Precio") y los pasillos que las conectan (**relaciones** como "Compra"). Su propósito es capturar las necesidades y servir de herramienta de comunicación: asegurarse de que la estructura tiene sentido antes de poner un solo ladrillo. Cualquiera puede leerlo.
+- **El Modelo ER es el plano del arquitecto** — el diseño _conceptual_. Es el primer boceto, y se dibuja hablando con el cliente (los usuarios del negocio). Define las habitaciones (**entidades** como "Cliente" o "Producto"), sus características (**atributos** como "nombre" o "precio") y los pasillos que las conectan (**relaciones** como "compra"). Su propósito es capturar las necesidades y servir de herramienta de comunicación: asegurarse de que la estructura tiene sentido antes de poner un solo ladrillo. Cualquiera puede leerlo.
     
 - **El Modelo Relacional es el plano de ingeniería** — el diseño _lógico_. Traduce el plano del arquitecto en especificaciones precisas y sin ambigüedad: las vigas, los muros de carga y las conducciones (**tablas**, **columnas**, **claves primarias y foráneas**). Su lector ya no es el cliente: es el equipo técnico.
 
@@ -120,7 +121,7 @@ Antes de nada, ¿qué es cada cosa?
 > Tras introducir los distintos conceptos, iremos completando el modelo Entidad/Relación de un ejemplo sencillo de una Empresa.
 > Sus requisitos simplificados son:
 > >[!exercise] La empresa está organizada en **Departamentos**
-> >	- Cada departamento tiene un nombre, un número único y un empleado que lo dirige.
+> >	- Cada departamento tiene un número único, nombre único y un empleado que lo dirige.
 > >	- Llevamos un registro de la fecha de ingreso del director del departamento.
 > >	- Un departamento se ubica en varias ubicaciones.
 > 
@@ -128,7 +129,7 @@ Antes de nada, ¿qué es cada cosa?
 > >	- Cada proyecto tiene un nombre único, un número único y se localiza en una única ubicación.
 > 
 > >[!exercise] La empresa tiene **Empleados** que trabajan para un departamento
-> >	-Cada empleado tiene dni, dirección, sueldo, sexo y fecha de nacimiento.
+> >	-Cada empleado tiene dni, nombre, dirección, sueldo, sexo y fecha de nacimiento.
 > >	-Cada empleado trabaja para un departamento pero puede trabajar en varios proyectos.
 > >	-Se deben registrar las horas semanales que un empleado trabaja actualmente en cada proyecto.
 > >	-Existen empleados que supervisan a otros empleados.
@@ -204,7 +205,7 @@ No todos los atributos son iguales. Se clasifican según cómo guardan la inform
         
 - **Multivalor 📇**: Es un atributo que puede tener varios valores para una misma entidad. Piensa en ello como una "lista" o "bolsa" de valores.
     
-    - **Ejemplo**: El atributo `telefono` de un `Empleado`, ya que una persona puede tener un móvil y un fijo. O los `Colores` de un `Coche`.
+    - **Ejemplo**: El atributo edición de un Curso , ya que de un Curso pueden haberse impartido varias ediciones.
     
     >[!warning] ⚠️ En esta asignatura adoptamos la convención de que todo atributo multivalor se convertirá, en la versión final del diagrama, en una entidad débil (lo veremos en la sección 5). Otras notaciones permiten mantenerlo como atributo, pero nuestra convención simplifica la traducción posterior al modelo relacional.
 
@@ -264,18 +265,19 @@ Además de la clasificación anterior, los atributos tienen otras característic
 > Ahora, para cada uno, listamos sus "adjetivos" o atributos según los requisitos:
 > 
 > >[!exercise] Tipo de Entidad `Departamento`
-> >	- nombre (clave candidata)*
 > >	- número (clave candidata)*
+> >	- nombre (clave candidata)*
 > >	- ubicaciones (multivalor)
 > >	- director
 > >	- fecha_ingreso_director
 > >	* De estas dos claves candidatas elegiremos una como primaria más adelante.
 > 
 > >[!exercise] Tipo de Entidad `Proyecto`
-> >	- nombre (clave)
-> >	- número (clave)
+> >	- número (clave candidata)*
+> >	- nombre (clave candidata)*
 > >	- ubicacion 
 > >	- departamento_control
+> >	* De estas dos claves candidatas elegiremos una como primaria más adelante.
 > 
 > >[!exercise] Tipo de Entidad `Empleado`
 > >	- dni (clave)
@@ -303,16 +305,26 @@ Además de la clasificación anterior, los atributos tienen otras característic
 >	¿Cuál sería la clave del tipo de Entidad `Familiar`?
 
 ---
->[!tip] De la Idea al Diagrama - Modelando con BigER y Crow's Foot
+>[!tip] De la idea al diagrama - modelando con BigER y Crow's foot
 > 
-  > | Concepto                                                                                                        | Textual en BigER                                                                                                                                                                        | Notación Crow's foot en BigER                                                                                                   |
-| ------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| Entidad                                                                                                 | `entity` **Entidad** {<br>..<br>}                                                                                                                                                       | ![](../imgs/BD%20-%20BigER%20Entidad.png)                                                                                               |
-| Atributo clave                                                                                          | `entity` Entidad {<br>**atributo_clave** `key`<br>}                                                                                                                                     | ![](../imgs/BD%20-%20BigER%20atributo%20clave.png)                                                                                      |
-| Atributo no clave                                                                                       | `entity` Entidad {<br>atributo_clave `key`<br>**atributo_no_clave**<br>}                                                                                                                | ![](../imgs/BD%20-%20BigER%20atributo%20no%20clave.png)                                                                                 |
-| Atributo de clave alternativa<br>**No Soportado por BigER pero haremos lo que se muestra en cada caso** | //**añadimos el comentario UNIQUE al final de la definición del atributo**<br>`entity` Entidad {<br>atributo_clave `key`<br>atributo_no_clave<br>**atributo_clave_alternativa //UNIQUE**<br>} | **Cuando lo dibujemos a mano, pondremos un subrayado discontinuo **<br>![](../imgs/BD%20-%20BigER%20atributo%20clave%20alternativa.png) |
-
+> | Concepto | Textual en BigER | Notación Crow's foot en BigER |
+> | --- | --- | --- |
+> | Entidad | // ==palabra reservada **entity** seguida del **nombre de entidad** con la **primera letra del nombre la entidad en mayúscula**. Si nombre de entidad está formado por varias palabras, pondremos todas las palabras con la primera letra en mayúsculas y concatenadas con el guión bajo (**Nombre_Entidad_Largo**)== <br>entity Entidad {<br>..<br>} | ![\|900](../imgs/BD%20-%20BigER%20Entidad.png) | 
+> | Atributos de Entidad | //==cada atributo se escribe en líneas sucesivas con la **primera letra del nombre del atributo en minúscula**. Si nombre de atributo está formado por varias palabras, pondremos todas las palabras con la primera letra en minúsculas y concatenadas con el guión bajo (**nombre_atributo_largo**)==<br>//==Tenemos tres tipos de atributos de Entidad que se muestran a continuación== |  | 
+> | Atributo clave | //==nombre de atributo clave seguida de la palabra reservada **key**== <br>//==el atributo se mostrará subrayado en el diagrama==<br>entity Entidad {<br>atributo_clave key<br>} | ![\|900](../imgs/BD%20-%20BigER%20atributo%20clave.png) |
+> | Atributo no clave |//==cada atributo no clave en cada línea sin ninguna palabra reservada==<br>entity Entidad {<br>atributo_clave key<br>atributo_no_clave<br>} | ![\|900](../imgs/BD%20-%20BigER%20atributo%20no%20clave.png) |
+> | Atributo de clave alternativa |//==nombre de atributo clave alternativa seguida de la palabra reservada **unique**==<br>//==el atributo se mostrará subrayado discontinuo en el diagrama== <br>entity Entidad {<br>atributo_clave key<br>atributo_no_clave<br>atributo_clave_alternativa&nbsp;unique<br>} | ![\|900](../imgs/BD%20-%20BigER%20atributo%20clave%20alternativa.png) |
 ---
+
+### Convenciones de nombres
+
+| Elemento | Convención | Ejemplo |
+|---|---|---|
+| Entidad | Cada palabra con mayúscula inicial, unidas con guion bajo | `Cuenta_Bancaria` |
+| Atributo | Todo en minúsculas, unido con guion bajo | `fecha_nacimiento` |
+| Relación | Todo en minúsculas, unido con guion bajo | `es_titular_de` |
+| Jerarquía | En minúsculas, nombrada por el **criterio** de clasificación | `por_jornada` |
+Los identificadores no admiten tildes ni la letra ñ: `anio`, `curso_academico`, `direccion`.
 ### 2.6 Refinando el Diseño: ¿Y los Verbos?
 
 Este primer diseño es un gran comienzo, pero está incompleto. Hemos identificado los sustantivos (`Entidades`) y sus adjetivos (`Atributos`), pero nos falta la parte más importante: las acciones o conexiones entre ellos, es decir, **los verbos**.
@@ -391,13 +403,13 @@ Este concepto es idéntico al que vimos con las entidades, y es crucial para sep
 > Tras eliminar los atributos como consecuencia de la creación de las relaciones, ahora las entidades tienen estos atributos:
 > 
 > >[!exercise] Tipo de Entidad `Departamento` 
-> >	- nombre (clave)
-> >	- numero (clave)
+> >	- número (clave candidata)
+> >	- nombre (clave candidata)
 > >	- ubicaciones (multivalor)
 > 
 > >[!exercise] Tipo de Entidad `Proyecto`
-> >	- nombre (clave)
-> >	- numero (clave)
+> >	- número (clave candidata)
+> >	- nombre (clave candidata)
 > >	- ubicacion 
 > 
 > >[!exercise] Tipo de Entidad `Empleado`
@@ -419,7 +431,7 @@ Este concepto es idéntico al que vimos con las entidades, y es crucial para sep
 > >	
 
 >[!question] Pregunta
->	¿Qué ha pasado con el atributo horas que formaba parte del atributo trabaja_en en el tipo de Entidad `Empleados` y con el atributo fecha_inicio_director en el tipo de Entidad `Departamentos`?
+>	¿Qué ha pasado con el atributo horas que formaba parte del atributo trabaja_en en el tipo de Entidad `Empleados` y con el atributo fecha_ingreso_director en el tipo de Entidad `Departamentos`?
 
 ---
 ### 3.4 Las Reglas del Juego: Restricciones Estructurales
@@ -467,17 +479,17 @@ Esta regla responde a la pregunta: **"¿Es obligatorio participar en esta relaci
 > 
   > | Concepto                                                                      | Textual en BigER                                                                                                                                                                      | Notación Crow's foot en BigER                                         |
 | ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| Relación                                                                      | `relationship` **relacion** {<br>Entidad_1[`MIN..MAX`] -> Entidad_2[`MIN..MAX`]<br>}                                                                                                    | ![](../imgs/BD%20-%20BigER%20Relacion%20Crows%20Foot.png)                              |
-| Relación con  cardinalidad mínima y máxima 1..1 en ambos lados                | `entity` Automovil {<br>..<br>}<br>`entity` Seguro {<br>..<br>}<br>`relationship` tiene {<br>Automovil[`1..1`] -> Seguro[`1..1`]<br>}<br><br>                                         | ![](../imgs/BD%20-%20BigER%20Relación%2011%2011%20Crows%20Foot.png) |
-| Relación con cardinalidad mínima y máxima 1..1 en un lado y 1..N  en el otro  | `entity` Provincia {<br>..<br>}<br>`entity` Municipio {<br>..<br>}<br>`relationship` contiene {<br>Provincia[`1..1`] -> Municipio[`1..N`]<br>}<br>                                    | ![](../imgs/BD%20-%20BigER%20Relación%2011%201N%20Crows%20Foot.png)           |
-| Relación con cardinalidad mínima y máxima  1..N en ambos lados                | `entity` Cliente {<br>..<br>}<br>`entity` Cuenta_Bancaria {<br>..<br>}<br>`relationship` es_titular_de {<br>Cliente[`1..N`] -> Cuenta_Bancaria[`1..N`]<br>}                           | ![](../imgs/BD%20-%20BigER%20Relación%201N%201N%20Crows%20Foot.png)           |
-| Relación con  cardinalidad mínima y máxima 0..1 en ambos lados                | `entity` Trabajador {<br>..<br>}<br>`entity` Plaza_Aparcamiento {<br>..<br>}<br>`relationship` tiene_asignada {<br>Trabajador[`0..1`] -> Plaza_Aparcamiento[`0..1`]<br>}              | ![](../imgs/BD%20-%20BigER%20Relación%2001%2001%20Crows%20Foot.png)           |
-| Relación con Cardinalidad Opcional 0..1 en un lado y 1..1  en el otro         | `entity` Provincia {<br>..<br>}<br>`entity` Municipio {<br>..<br>}<br>`relationship` tiene_capital {<br>Provincia[`0..1`] -> Municipio[`1..1`]<br>}                                   | ![](../imgs/BD%20-%20BigER%20Relación%2001%2011%20Crows%20Foot.png)           |
-| Relación con cardinalidad mínima y máxima 0..1 en un lado y 1..N  en el otro  | `entity` Cooperativa {<br>..<br>}<br>`entity` Agricultor {<br>..<br>}<br>`relationship` formada_por {<br>Cooperativa[`0..1`] -> Agricultor[`1..N`]<br>}                               | ![](../imgs/BD%20-%20BigER%20Relación%2001%201N%20Crows%20Foot.png)           |
-| Relación con  cardinalidad mínima y máxima 0..N en ambos lados                | `entity` Turista {<br>..<br>}<br>`entity` Monumento {<br>..<br>}<br>`relationship` visita {<br>Turista[`0..N`] -> Monumento[`0..N`]<br>}                                              | ![](../imgs/BD%20-%20BigER%20Relación%200N%200N%20Crows%20Foot.png)           |
-| Relación con cardinalidad mínima y máxima 0..N en un lado y 1..1  en el otro  | `entity` Vehiculo_Matriculado {<br>..<br>}<br>`entity` Persona {<br>..<br>}<br>`relationship` es_propiedad_de {<br>Vehiculo_Matriculado[`0..N`] -> Persona[`1..1`]<br>}               | ![](../imgs/BD%20-%20BigER%20Relación%200N%2011%20Crows%20Foot.png)           |
-| Relación con cardinalidad mínima y máxima 0..N en un lado y 1..N  en el otro  | `entity` Interprete {<br>..<br>}<br>`entity` Pelicula {<br>..<br>}<br>`relationship` actua_en {<br>Interprete[`0..N`] -> Pelicula[`1..N`]<br>}                                        | ![](../imgs/BD%20-%20BigER%20Relación%200N%201N%20Crows%20Foot.png)           |
-| Relación con cardinalidad mínima y máxima 0..1 en un lado y  0..N  en el otro | `entity` Socio_Biblioteca {<br>..<br>}<br>`entity` Ejemplar_de_Libro {<br>..<br>}<br>`relationship` tiene_en_prestamo {<br>Socio_Biblioteca[`0..1`] -> Ejemplar_de_Libro[`0..N`]<br>} | ![](../imgs/BD%20-%20BigER%20Relación%2001%200N%20Crows%20Foot.png)           |
+| Relación                                                                      | // ==palabra reservada **relationship** seguida del **nombre de la relación**. Si nombre de relación está formado por varias palabras, pondremos todas las palabras con la primera letra en minúsculas y concatenadas con el guión bajo (**nombre_relación_larga**)==<br>relationship relacion {<br>Entidad_1[MIN..MAX] -> Entidad_2[MIN..MAX]<br>}<br><br>// ==**MIN** es la cardinalidad mínima y puede ser 0 o 1 y **MAX** es la cardinalidad máxima y puede ser 1 o N==<br>//==En la imagen del ejemplo se ha usado 0..N y 0..N:==<br>relationship relacion {<br>Entidad_1[0..N] -> Entidad_2[0..N]<br>}                                                                                                  | ![\|900](../imgs/BD%20-%20BigER%20Relacion.png)                              |
+| Relación con  cardinalidad mínima y máxima 1..1 en ambos lados                | entity Automovil {<br>..<br>}<br>entity Seguro {<br>..<br>}<br>relationship tiene {<br>Automovil[1..1] -> Seguro[1..1]<br>}<br><br>                                         | ![\|900](../imgs/BD%20-%20BigER%20Relación%2011%2011.png) |
+| Relación con cardinalidad mínima y máxima 1..1 en un lado y 1..N  en el otro  | entity Provincia {<br>..<br>}<br>entity Municipio {<br>..<br>}<br>relationship contiene {<br>Provincia[1..1] -> Municipio[1..N]<br>}<br>                                    | ![\|900](../imgs/BD%20-%20BigER%20Relación%2011%201N.png)           |
+| Relación con cardinalidad mínima y máxima  1..N en ambos lados                | entity Cliente {<br>..<br>}<br>entity Cuenta_Bancaria {<br>..<br>}<br>relationship es_titular_de {<br>Cliente[1..N] -> Cuenta_Bancaria[1..N]<br>}                           | ![\|900](../imgs/BD%20-%20BigER%20Relación%201N%201N.png)           |
+| Relación con  cardinalidad mínima y máxima 0..1 en ambos lados                | entity Trabajador {<br>..<br>}<br>entity Plaza_Aparcamiento {<br>..<br>}<br>relationship tiene_asignada {<br>Trabajador[0..1] -> Plaza_Aparcamiento[0..1]<br>}              | ![\|900](../imgs/BD%20-%20BigER%20Relación%2001%2001.png)           |
+| Relación con Cardinalidad Opcional 0..1 en un lado y 1..1  en el otro         | entity Provincia {<br>..<br>}<br>entity Municipio {<br>..<br>}<br>relationship tiene_capital {<br>Provincia[0..1] -> Municipio[1..1]<br>}                                   | ![\|900](../imgs/BD%20-%20BigER%20Relación%2001%2011.png)           |
+| Relación con cardinalidad mínima y máxima 0..1 en un lado y 1..N  en el otro  | entity Cooperativa {<br>..<br>}<br>entity Agricultor {<br>..<br>}<br>relationship formada_por {<br>Cooperativa[0..1] -> Agricultor[1..N]<br>}                               | ![\|900](../imgs/BD%20-%20BigER%20Relación%2001%201N.png)           |
+| Relación con  cardinalidad mínima y máxima 0..N en ambos lados                | entity Turista {<br>..<br>}<br>entity Monumento {<br>..<br>}<br>relationship visita {<br>Turista[0..N] -> Monumento[0..N]<br>}                                              | ![\|900](../imgs/BD%20-%20BigER%20Relación%200N%200N.png)           |
+| Relación con cardinalidad mínima y máxima 0..N en un lado y 1..1  en el otro  | entity Vehiculo_Matriculado {<br>..<br>}<br>entity Persona {<br>..<br>}<br>relationship es_propiedad_de {<br>Vehiculo_Matriculado[0..N] -> Persona[1..1]<br>}               | ![\|900](../imgs/BD%20-%20BigER%20Relación%200N%2011.png)           |
+| Relación con cardinalidad mínima y máxima 0..N en un lado y 1..N  en el otro  | entity Interprete {<br>..<br>}<br>entity Pelicula {<br>..<br>}<br>relationship actua_en {<br>Interprete[0..N] -> Pelicula[1..N]<br>}                                        | ![\|900](../imgs/BD%20-%20BigER%20Relación%200N%201N.png)           |
+| Relación con cardinalidad mínima y máxima 0..1 en un lado y  0..N  en el otro | entity Socio_Biblioteca {<br>..<br>}<br>entity Ejemplar_de_Libro {<br>..<br>}<br>relationship tiene_en_prestamo {<br>Socio_Biblioteca[0..1] -> Ejemplar_de_Libro[0..N]<br>} | ![\|900](../imgs/BD%20-%20BigER%20Relación%2001%200N.png)           |
 
 ---
 ### 3.5 Relaciones Recursivas: Cuando una Entidad se Relaciona Consigo Misma
@@ -488,14 +500,14 @@ Para que tenga sentido, la entidad participa en la relación desempeñando disti
 
 > **Analogía del Teatro 🎭**: Piensa en el tipo de entidad `Empleado` como un grupo de actores. En la relación `supervisa`, un actor interpreta el **rol de "supervisor"** y otro actor interpreta el **rol de "supervisado"**. La relación conecta a un empleado en un rol con otro empleado en otro rol.
 
-Cada instancia de la relación (ej: "Ana supervisa a Juan") siempre implicará a dos entidades distintas, aunque ambas pertenezcan al mismo tipo `Empleado`.
+Cada instancia de la relación (ej: "Ana supervisa a Juan") siempre implicará a dos instancias distintas de la entidad que se está relacionando, aunque ambas pertenezcan al mismo tipo `Empleado`.
 
 ---
 >[!tip] De la Idea al Diagrama - Modelando con BigER y Crow's Foot
 > 
   > |  Concepto                             | Textual en BigER                                                                                                                  | Notación Crow's foot en BigER                                           |
 | ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| Relación recursiva con roles | `entity` Usuario {<br>..<br>}<br>`relationship` sigue {<br>Usuario[`1..N` \|  `"Seguidor"`] -> Usuario[`1..N`\| `"Seguido"`]<br>} | ![](../imgs/BD%20-%20BigER%20Relación%20Recursiva%20Crows%20Foot.png) |
+| Relación recursiva con roles | entity Usuario {<br>..<br>}<br>relationship sigue {<br>Usuario[0..N \|  "Seguidor"] -> Usuario[0..N\| "Seguido"]<br>} | ![\|900](../imgs/BD%20-%20BigER%20Relación%20Recursiva.png) |
 
 ---
 ### 3.6 Atributos en las Relaciones: Describiendo la Conexión
@@ -509,7 +521,7 @@ A veces, una característica no describe a una entidad, sino a la **interacción
 > - Las `horas` no son un atributo del `Proyecto`, porque diferentes empleados le dedican diferentes horas.
 >     
 > 
-> Las `horas` son una propiedad de la **conexión específica** entre un empleado y un proyecto. Por lo tanto, `Horas` es un atributo del tipo de relación `trabaja_en`.
+> Las `horas` son una propiedad de la **conexión específica** entre un empleado y un proyecto. Por lo tanto, `horas` es un atributo del tipo de relación `trabaja_en`.
 
 >[!tip] **Regla de colocación de atributos de relación**:
 >- En relaciones **M:N**, los atributos que describen la interacción **deben** ir en la relación.
@@ -522,12 +534,12 @@ A veces, una característica no describe a una entidad, sino a la **interacción
 > 
   > | Concepto                      | Textual en BigER                                                     | Notación Crow's foot en BigER                                                                                                                                                                                                                                                           |
 | -------------------- | -------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Atributo de relación | `relationship` **relacion** {<br>..<br>**atributo_de_relacion**<br>} | **Cuando pasemos el cursor en BigER por encima de la relación veremos que nos muestra el atributo**<br>![](../imgs/BD%20-%20BigER%20Atributo%20de%20Relación%20marcado.png)<br>**Cuando lo dibujemos a mano, pondremos una línea conectando al atributo**<br>![](../imgs/BD%20-%20BigER%20Atributo%20de%20Relacion.png)<br> |
+| Atributo de relación | relationship relacion {<br>..<br>**atributo_de_relacion_1**<br>**atributo_de_relacion_2**<br>} | ![\|900](../imgs/BD%20-%20BigER%20Atributo%20de%20Relacion.png)<br> |
 
 ---
 ### 3.7 Primera versión (incompleta e incorrecta) del Diagrama ER de Empresa
 
-Con lo que sabemos hasta ahora, si tuvierámos que modelar el Diagrama Entidad Relación de la Empresa, podríamos obtener el siguiente diagrama que, aunque se acerca bastante a la versión final, no está completo ni es totalmente correcto.
+Con lo que sabemos hasta ahora, si tuviéramos que modelar el Diagrama Entidad Relación de la Empresa, podríamos obtener el siguiente diagrama que, aunque se acerca bastante a la versión final, no está completo ni es totalmente correcto.
 
 ![BD Empresa versión inicial incorrecta - BigER](anexos/BD%20Empresa%20versión%20inicial%20incorrecta%20-%20BigER.md)
 
@@ -539,13 +551,13 @@ Con lo que sabemos hasta ahora, si tuvierámos que modelar el Diagrama Entidad R
 >	¿Es correcto el atributo multivaluado `ubicaciones` en la Entidad `Departamento`?
 
 Guarda mentalmente esta versión: cuando terminemos la sección 5 volveremos sobre ella y verás exactamente qué cosas estaban mal y por qué.
-## 4: El Arte del Buen Diseño - Criterios y Decisiones Clave
+## 4. El Arte del Buen Diseño - Criterios y Decisiones Clave
 
 Saber qué son las entidades, atributos y relaciones es solo la mitad del camino. La otra mitad es saber **cuándo y cómo usarlos correctamente**. Un buen diseñador de bases de datos es como un buen arquitecto: toma decisiones informadas para crear un modelo que sea sólido, lógico y fácil de entender. A continuación, exploramos los criterios más importantes.
 
 ### 4.1 ¿Entidad o Atributo? La Primera Gran Decisión 🤔
 
-A menudo te encontrarás con un concepto y dudarás: ¿debería ser su propia entidad con un rectángulo en el diagrama, o simplemente un atributo (un óvalo) dentro de otra entidad?
+A menudo te encontrarás con un concepto y dudarás: ¿debería ser su propia entidad con un rectángulo en el diagrama, o simplemente un atributo de otra entidad?
 
 **La regla de oro**: Será una **entidad** si necesitas almacenar información descriptiva sobre ese concepto. Si solo necesitas su valor, será un **atributo**.
 
@@ -575,7 +587,7 @@ Este es un **==error crítico en la fase de diseño conceptual==**. La regla es 
 3. **La Claridad es la Reina**: Usa siempre nombres adecuados, legibles y fáciles de entender para tus entidades, relaciones y atributos. Un diagrama bien nombrado se documenta a sí mismo. Piensa en quien tenga que leer tu modelo dentro de seis meses, incluso tú mismo puedes ser ese lector que ya no lo recuerde.
 
 ---
-## 5: Entidades Débiles - Cuando una Entidad Necesita Ayuda para Identificarse
+## 5. Entidades Débiles - Cuando una Entidad Necesita Ayuda para Identificarse
 
 ### 5.1 Entidades Fuertes vs. Débiles: La Diferencia Clave
 
@@ -612,13 +624,13 @@ La identidad única solo se consigue al combinar la clave de su entidad "dueña"
 ---
 ### 5.3 La Anatomía de una Entidad Débil
 
-Una entidad débil siempre viene acompañada de dos elementos que la definen:
+Una entidad débil siempre viene acompañada de tres elementos que la definen:
 
 1. **Entidad Propietaria (o Fuerte)**: Es la entidad de la que depende (ej: `Empleado`).
     
 2. **Relación débil de Identificación**: la conexión entre una entidad fuerte y su entidad débil **siempre** es mediante una relación, también denominada débil, que tendrá cardinalidad  `(1,1)` en el lado de la entidad fuerte y `(0,N)` o `(1,N)` en el lado de la entidad débil. Es decir, una instancia de la entidad débil no puede existir sin su entidad fuerte de la que depende y solo tiene una. Mientras que una instancia de la entidad fuerte puede no estar relacionada con ninguna de la entidad débil, con una o con muchas.
     
-3. **Clave Parcial (o Discriminante)**: Es el atributo (o conjunto de atributos) dentro de la entidad débil que la identifica de forma única **entre sus hermanas**, es decir, entre todas las que dependen del mismo propietario. En nuestro ejemplo, el `Nombre` del `Familiar` es la clave parcial.
+3. **Clave Parcial (o Discriminante)**: Es el atributo (o conjunto de atributos) dentro de la entidad débil que la identifica de forma única **entre sus hermanas**, es decir, entre todas las que dependen del mismo propietario. En nuestro ejemplo, el `nombre` del `Familiar` es la clave parcial.
     
 **Clave Primaria de la Entidad Débil**: La clave primaria completa de una entidad débil se forma combinando la **clave primaria de su entidad propietaria** con su propia **clave parcial**.
 
@@ -628,8 +640,8 @@ Una entidad débil siempre viene acompañada de dos elementos que la definen:
 >
 > | Concepto               | Textual en BigER                                                                                                                                           | Notación Crow's foot en BigER                        |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
-| Entidad débil  | `weak entity` **Entidad_Debil** {<br>clave_parcial `partial-key`<br>..<br>}                                                                                | ![](../imgs/BD%20-%20BigER%20Entidad%20Débil.png)  |
-| Relación débil | `weak relationship` **relacion_debil** {<br>Entidad[`1..1`] -> Entidad_Debil[`0..N`]<br>//dependiendo del caso, también puede ser Entidad_Debil[`1..N`]<br>} | ![](../imgs/BD%20-%20BigER%20Relación%20débil.png) |
+| Entidad débil  | weak entity Entidad_Debil {<br>clave_parcial partial-key<br>..<br>}                                                                                | ![\|900](../imgs/BD%20-%20BigER%20Entidad%20Débil.png)  |
+| Relación débil | weak relationship relacion_debil {<br>Entidad[1..1] -> Entidad_Debil[0..N]<br>//dependiendo del caso, también puede ser Entidad_Debil[1..N]<br>} | ![\|900](../imgs/BD%20-%20BigER%20Relación%20debil.png) |
 
 
 ---
@@ -645,16 +657,16 @@ No podemos modelarlo como se ve a continuación
 
 >[!warning] ⚠️ Modelado erróneo:
 
-| BigER                                                                                                   | Crow's foot                                              |
-| ------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
-| `entity` Curso {<br>codigo `key`<br>nombre<br>¿edicion?<br>¿fecha_inicio?<br>¿fecha_fin?<br>¿aula?<br>} | ![](../imgs/BD%20-%20BigER%20Entidad%20Curso%20Foot.png) |
+| BigER                                                                                               | Crow's foot                                              |
+| --------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
+| entity Curso {<br>codigo key<br>nombre<br>¿edicion?<br>¿fecha_inicio?<br>¿fecha_fin?<br>¿aula?<br>} | ![](../imgs/BD%20-%20BigER%20Entidad%20Curso.png) |
 **Solución**: El posible atributo multivalor `edicion` hay que convertirlo en la entidad débil `Edicion` que depende de `Curso`. Su clave parcial puede ser `fecha_inicio` si sabemos que no hay dos o más ediciones que comiencen en la misma fecha. Así, podemos almacenar toda la información de cada edición de forma ordenada.
 
 >[!tip] Modelado correcto:
 
-| BigER                                                                                                                                                                                                                            | Crow's foot                                                      |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
-| ```entity``` Curso {<br>codigo ```key```<br>nombre<br>}<br>==weak entity== Edicion {<br>fecha_inicio ==partial-key==<br>fecha_fin<br>aula<br>}<br>==weak relationship== tiene {<br>Curso[```1..1```] -> Edicion[```0..N```]<br>} | ![](../imgs/BD%20-%20BigER%20Debil%20Edicion%20Crows%20Foot.png) |
+| BigER                                                                                                                                                                                                    | Crow's foot                                                   |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| entity Curso {<br>codigo key<br>nombre<br>}<br>==weak entity== Edicion {<br>fecha_inicio ==partial-key==<br>fecha_fin<br>aula<br>}<br>==weak relationship== tiene {<br>Curso[1..1] -> Edicion[0..N]<br>} | <br>![](../imgs/BD%20-%20BigER%20Debil%20Curso%20Edicion.png) |
 #### 5.4.2 Caso 2: Para gestionar atributos multivaluados en una relación M:N con repetición de relaciones entre instancias.
 
 En el mundo real, las relaciones no son estáticas; muchas cambian con el tiempo. Un empleado cambia de departamento, un médico deja de estar adscrito a un hospital, un proveedor suministra la misma pieza a un proyecto en diferentes fechas. Hasta ahora sabemos cómo hacer la "foto" actual, pero ¿cómo guardamos el **álbum de fotos completo**?
@@ -663,21 +675,22 @@ Por ejemplo, un `Profesor` imparte una `Asignatura`. Esta es una relación M:N. 
 
 >[!warning] ⚠️ Modelado erróneo:
 
-| BigER                                                                                                                                                                                                                               | Crow's foot                                                            |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `entity` Profesor {<br>nif `key`<br>nombre<br>apellido_1<br>apellido_2<br>}<br><br>`entity` Asignatura {<br>codigo `key`<br>nombre<br>}<br><br>```relationship``` imparte {<br>Profesor[`0..N`] -> Asignatura[`0..N`]<br>curso<br>} | ![](../imgs/BD%20-%20BigER%20Profesor%20Asignatura%20Crows%20Foot.png) |
-**Solución**: la solución es un patrón de diseño muy potente: "cosificar" ( o "reificar", del inglés *reifly*) la relación. Esto significa convertir la interacción a lo largo del tiempo en una **entidad débil con repetición** (o histórica). Esta nueva entidad guardará cada "evento" de la relación, y su clave primaria ==casi siempre== incluirá un atributo de tiempo (como `curso`o `fecha`).
+| BigER                                                                                                                                                                                                             | Crow's foot                                                      |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| entity Profesor {<br>nif key<br>nombre<br>apellido_1<br>apellido_2<br>}<br><br>entity Asignatura {<br>codigo key<br>nombre<br>}<br><br>relationship imparte {<br>Profesor[0..N] -> Asignatura[0..N]<br>curso<br>} | ![](../imgs/BD%20-%20BigER%20Debil%20Profesor%20sin%20hacer.png) |
+**Solución**: la solución es un patrón de diseño muy potente: "reificar" ( del inglés *reify*) la relación. Esto significa convertir la interacción a lo largo del tiempo en una **entidad débil con repetición** (o histórica). Esta nueva entidad guardará cada "evento" de la relación, y su clave primaria ==casi siempre== incluirá un atributo de tiempo (como `curso`o `fecha`).
 
-En nuestro ejemplo de un `Profesor` imparte una `Asignatura` reificamos" la relación, es decir, la convertimos en una entidad débil llamada `Docencia`. Esta entidad depende de `Profesor` y `Asignatura`, y su clave parcial es `curso`. 
+En nuestro ejemplo de un `Profesor` imparte una `Asignatura` "reificamos" la relación, es decir, la convertimos en una entidad débil llamada `Docencia`. Esta entidad depende de `Profesor` y `Asignatura`, y su clave parcial es `curso`. 
+	- `nif` por la relación débil que tiene con Profesor
 	- `codigo` por la relación débil que tiene con Asignatura
 	- `curso` la clave parcial que aporta Docencia
 Esta clave compuesta por 3 atributos ahora sí es única.
 
 >[!tip] Modelado correcto:
 
-| BigER                                                                                                                                                                                                                                                                                                                                                                            | Crow's foot                                                       |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| `entity` Profesor {<br>nif `key`<br>nombre<br>apellido_1<br>apellido_2<br>}<br>`entity` Asignatura {<br>codigo `key`<br>nombre<br>}<br><br>==weak entity== Docencia {<br>curso ==partial-key==<br>}<br><br>==weak relationship== imparte {<br>Profesor[`1..1`] -> Docencia[`0..N`]<br>}<br><br>==weak relationship== relativa_a {<br>Docencia[`0..N`] -> Asignatura[`1..1`]<br>} | ![](../imgs/BD%20-%20BigER%20Debil%20Docencia%20Crows%20Foot.png) |
+| BigER                                                                                                                                                                                                                                                                                                                                                            | Crow's foot                                        |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
+| entity Profesor {<br>nif key<br>nombre<br>apellido_1<br>apellido_2<br>}<br>entity Asignatura {<br>codigo key<br>nombre<br>}<br><br>==weak entity== Docencia {<br>curso ==partial-key==<br>}<br><br>==weak relationship== imparte {<br>Profesor[1..1] -> Docencia[0..N]<br>}<br><br>==weak relationship== relativa_a {<br>Docencia[0..N] -> Asignatura[1..1]<br>} | ![](../imgs/BD%20-%20BigER%20Debil%20Docencia.png) |
 
 Sin embargo, la clave para un diseño correcto es decidir de qué entidad o entidades debe depender esta nueva entidad histórica. La respuesta depende de la cardinalidad de la relación **en un instante de tiempo**. Analicemos los tres casos posibles.
 
@@ -712,16 +725,16 @@ Sin embargo, la clave para un diseño correcto es decidir de qué entidad o enti
 	    - `codigo` por la relación débil que tiene con `Asignatura`
 	    - `curso_academico` la clave parcial que aporta `Matricula`
 
-| BigER                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Crow's foot                                                        |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
-| ```entity``` Estudiante {<br>numero_expediente `key`<br>dni `//UNIQUE`<br>nombre<br>apellido_1<br>apellido_2<br>}<br><br>`entity` Asignatura {<br>codigo ```key```<br>nombre<br>}<br><br>==weak entity== Matricula {<br>curso_academico ==partial-key==<br>}<br><br>==weak relationship== ha_realizado {<br>Estudiante[`1..1`] -> Matricula[`0..N`]<br>}<br><br>==weak relationship== corresponde_a {<br>Matricula[`0..N`] -> Asignatura[`1..1`]<br>} | ![](../imgs/BD%20-%20BigER%20Debil%20Matricula%20Crows%20Foot.png) |
+| BigER                                                                                                                                                                                                                                                                                                                                                                                                                     | Crow's foot                                         |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
+| entity Estudiante {<br>numero_expediente key<br>dni unique<br>nombre<br>apellido_1<br>apellido_2<br>}<br><br>entity Asignatura {<br>codigo key<br>nombre<br>}<br><br>==weak entity== Matricula {<br>curso_academico ==partial-key==<br>}<br><br>==weak relationship== ha_realizado {<br>Estudiante[1..1] -> Matricula[0..N]<br>}<br><br>==weak relationship== corresponde_a {<br>Matricula[0..N] -> Asignatura[1..1]<br>} | ![](../imgs/BD%20-%20BigER%20Debil%20Matricula.png) |
 ###### Ejemplo 5.4.2.1.2: Reservas de Vuelos
 
 - **Entidades**: `Pasajero`, `Vuelo`.
     
 - **Contexto Histórico**: Una aerolínea necesita un registro de cada reserva individual.
     
-- **Regla de Negocio**: En una transacción de reserva realizada en una `Fecha_Reserva` específica, un `Pasajero` (o un grupo de ellos bajo el mismo localizador) se reserva en **varios** `VueloS` (ej: un viaje con escalas). A su vez, un `Vuelo` tiene **varios** `Pasajeros` a bordo.
+- **Regla de Negocio**: En una transacción de reserva realizada en una `Fecha_Reserva` específica, un `Pasajero` (o un grupo de ellos bajo el mismo localizador) incluye una reserva en **varias instancias de** `Vuelo` (ej: un viaje con escalas). A su vez, un `Vuelo` tiene **varios** `Pasajeros` a bordo.
     
 - **Análisis de Unicidad**: Una reserva concreta no puede ser identificada solo por `(ID_Pasajero, Fecha_Reserva)` si el pasajero reservó un viaje con múltiples vuelos. Tampoco por `(ID_Vuelo, Fecha_Reserva)`, ya que en ese vuelo hay muchos pasajeros. La reserva es la combinación de un pasajero específico en un vuelo específico en un momento dado.
     
@@ -736,9 +749,9 @@ Sin embargo, la clave para un diseño correcto es decidir de qué entidad o enti
 	    - `id_vuelo` por la relación débil que tiene con `Vuelo`
 	    - `fecha_reserva` la clave parcial que aporta `Reserva`
 
-| BigER                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Crow's foot                                                      |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
-| ```entity``` Pasajero {<br>id_pasajero ```key```<br>dni ```//UNIQUE```<br>nombre<br>apellido_1<br>apellido_2<br>}<br><br>```entity``` Vuelo {<br>id_vuelo ```key```<br>origen<br>destino<br>fecha_hora_salida<br>}<br><br>==weak entity== Reserva {<br>fecha_reserva ==partial-key==<br>}<br><br>==weak relationship== es_realizada_por {<br>Pasajero[```1..1```] -> Reserva[```1..N```]<br>}<br><br>==weak relationship== incluye {<br>Vuelo[```1..1```] -> Reserva[```0..N```]<br>} | ![](../imgs/BD%20-%20BigER%20Debil%20Reserva%20Crows%20Foot.png) |
+| BigER                                                                                                                                                                                                                                                                                                                                                                                                                         | Crow's foot                                       |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| entity Pasajero {<br>id_pasajero key<br>dni unique<br>nombre<br>apellido_1<br>apellido_2<br>}<br><br>entity Vuelo {<br>id_vuelo key<br>origen<br>destino<br>fecha_hora_salida<br>}<br><br>==weak entity== Reserva {<br>fecha_reserva ==partial-key==<br>}<br><br>==weak relationship== es_realizada_por {<br>Pasajero[1..1] -> Reserva[1..N]<br>}<br><br>==weak relationship== incluye {<br>Vuelo[1..1] -> Reserva[0..N]<br>} | ![](../imgs/BD%20-%20BigER%20Debil%20Reserva.png) |
 
 ---
 
@@ -766,7 +779,7 @@ Sin embargo, la clave para un diseño correcto es decidir de qué entidad o enti
     
     1. Creamos la entidad débil `Asignacion_Historica`.
         
-    2. Podemos elegir de quien depende. 
+    2. Podemos elegir de quién depende. 
 	    1. Si el foco del sistema es el historial del empleado, la hacemos depender de `Empleado`. 
 	    2. Si el foco es el historial del vehículo, la hacemos depender de `Vehiculo`.
         
@@ -781,15 +794,15 @@ Sin embargo, la clave para un diseño correcto es decidir de qué entidad o enti
 
 **Opción A (foco en Empleado)**
 
-| BigER                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Crow's foot                                                                     |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| `entity` Empleado {<br>id_empleado `key`<br>dni `//UNIQUE`<br>nombre<br>apellido_1<br>apellido_2<br>}<br><br>`entity` Vehiculo {<br>matricula `key`<br>marca<br>modelo<br>}<br><br>==weak entity== Asignacion_Historica {<br>fecha_asignacion ==partial-key==<br>}<br><br>==weak relationship== ha_tenido {<br>Empleado[`1..1`] -> Asignacion_Historica[`0..N`]<br>}<br><br>```relationship``` incluye {<br>Vehiculo[`1..1`] -> Asignacion_Historica[`0..N`]<br>} | ![](../imgs/BD%20-%20BigER%20Debil%20Asignacion%20Historica%20Crows%20Foot.png) |
+| BigER                                                                                                                                                                                                                                                                                                                                                                                                                                   | Crow's foot                                                                        |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| entity Empleado {<br>id_empleado key<br>dni unique<br>nombre<br>apellido_1<br>apellido_2<br>}<br><br>entity Vehiculo {<br>matricula key<br>marca<br>modelo<br>}<br><br>==weak entity== Asignacion_Historica {<br>fecha_asignacion ==partial-key==<br>}<br><br>==weak relationship== ha_tenido {<br>Empleado[1..1] -> Asignacion_Historica[0..N]<br>}<br><br>relationship incluye {<br>Vehiculo[1..1] -> Asignacion_Historica[0..N]<br>} | ![](../imgs/BD%20-%20BigER%20Debil%20Asignacion%20Historica%20Foco%20Empleado.png) |
 
    **Opción B (foco en Vehículo)**
 
-| BigER                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Crow's foot                                                                   |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| `entity` Empleado {<br>id_empleado `key`<br>dni `//UNIQUE`<br>nombre<br>apellido_1<br>apellido_2<br>}<br><br>`entity` Vehiculo {<br>matricula `key`<br>marca<br>modelo<br>}<br><br>==weak entity== Asignacion_Historica {<br>fecha_asignacion ==partial-key==<br>}<br><br>`relationship` ha_tenido {<br>Empleado[`1..1`] -> Asignacion_Historica[`0..N`]<br>}<br><br>==weak relationship== incluye {<br>Vehiculo[`1..1`] -> Asignacion_Historica[`0..N`]<br>} | ![](../imgs/BD%20-%20BigER%20Debil%20AsignacionHistorica2%20Crows%20Foot.png) |
+| BigER                                                                                                                                                                                                                                                                                                                                                                                                                                   | Crow's foot                                                                        |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| entity Empleado {<br>id_empleado key<br>dni unique<br>nombre<br>apellido_1<br>apellido_2<br>}<br><br>entity Vehiculo {<br>matricula key<br>marca<br>modelo<br>}<br><br>==weak entity== Asignacion_Historica {<br>fecha_asignacion ==partial-key==<br>}<br><br>relationship ha_tenido {<br>Empleado[1..1] -> Asignacion_Historica[0..N]<br>}<br><br>==weak relationship== incluye {<br>Vehiculo[1..1] -> Asignacion_Historica[0..N]<br>} | ![](../imgs/BD%20-%20BigER%20Debil%20Asignacion%20Historica%20Foco%20Vehiculo.png) |
 
 ###### Ejemplo 5.4.2.2.2: Gestor de Clientes VIP
 
@@ -805,37 +818,37 @@ Sin embargo, la clave para un diseño correcto es decidir de qué entidad o enti
     
     1. Creamos la entidad débil `Asignacion_Vip`.
         
-    2. Podemos elegir de quien depende. 
+    2. Podemos elegir de quién depende. 
 	    1. Si el foco del sistema es la **cartera de clientes de cada gestor**, la hacemos depender de `Gestor_Cuentas`. 
-	    2. Si el foco es el el **historial de gestores que ha tenido un cliente**, la entidad dependerá de `Cliente_Vip`.
+	    2. Si el foco es el **historial de gestores que ha tenido un cliente**, la entidad dependerá de `Cliente_Vip`.
                 
     3. Su clave primaria es la combinación de dos piezas de información:
 	    1. **Opción A (foco en Gestor)**: 
 		    - `id_gestor` por la relación débil que tiene con `Gestor_Cuentas`
 		    - `trimestre` la clave parcial que aporta `Asignacion_Vip`
 	
-	    2. **Opción B (foco en Vehículo)**: 
+	    2. **Opción B (foco en Cliente_Vip)**: 
 		    - `id_cliente_vip` por la relación débil que tiene con  `Cliente_Vip`
 		    - `trimestre` la clave parcial que aporta `Asignacion_Vip`
         
 **Opción A (foco en Gestor)**
 
-| BigER                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Crow's foot                                                                |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| `entity` Gestor_Cuentas {<br>id_gestor `key`<br>dni `//UNIQUE`<br>nombre<br>apellido_1<br>apellido_2<br>}<br><br>`entity` Cliente_Vip {<br>id_cliente_vip `key`<br>nombre_empresa<br>}<br><br>==weak entity== Asignacion_Vip {<br>trimestre ==partial-key==<br>}<br><br>==weak relationship== es_responsable_de {<br>Gestor_Cuentas[`1..1`] -> Asignacion_Vip[`1..N`]<br>}<br><br>`relationship` asigna_a{<br>Asignacion_Vip[`1..N`] -><br>Cliente_Vip[`1..1`]  <br>} | ![](../imgs/BD%20-%20BigER%20Debil%20Asignacion%20VIP2%20Crows%20Foot.png) |
+| BigER                                                                                                                                                                                                                                                                                                                                                                                                                                           | Crow's foot                                                                          |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| entity Gestor_Cuentas {<br>id_gestor key<br>dni unique<br>nombre<br>apellido_1<br>apellido_2<br>}<br><br>entity Cliente_Vip {<br>id_cliente_vip key<br>nombre_empresa<br>}<br><br>==weak entity== Asignacion_Vip {<br>trimestre ==partial-key==<br>}<br><br>==weak relationship== es_responsable_de {<br>Gestor_Cuentas[1..1] -> Asignacion_Vip[1..N]<br>}<br><br>relationship asigna_a{<br>Asignacion_Vip[1..N] -><br>Cliente_Vip[1..1]  <br>} | ![](../imgs/BD%20-%20BigER%20Debil%20Asignacion%20VIP%20Foco%20Gestor%20Cuentas.png) |
 
-   **Opción B (foco en Cliente)**
+   **Opción B (foco en Cliente_Vip)**
 
-| BigER                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Crow's foot                                                               |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| `entity` Gestor_Cuentas {<br>id_gestor `key`<br>dni `//UNIQUE`<br>nombre<br>apellido_1<br>apellido_2<br>}<br><br>`entity` Cliente_Vip {<br>id_cliente_vip `key`<br>nombre_empresa<br>}<br><br>==weak entity== Asignacion_Vip {<br>trimestre ==partial-key==<br>}<br><br>`relationship` es_responsable_de {<br>Gestor_Cuentas[`1..1`] -> Asignacion_Vip[`1..N`]<br>}<br><br>==weak relationship== asigna_a{<br>Asignacion_Vip[`1..N`] -><br>Cliente_Vip[`1..1`]  <br>} | ![](../imgs/BD%20-%20BigER%20Debil%20Asignacion%20VIP%20Crows%20Foot.png) |
+| BigER                                                                                                                                                                                                                                                                                                                                                                                                                                             | Crow's foot                                                                       |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| entity Gestor_Cuentas {<br>id_gestor key<br>dni unique<br>nombre<br>apellido_1<br>apellido_2<br>}<br><br>entity Cliente_Vip {<br>id_cliente_vip `key`<br>nombre_empresa<br>}<br><br>==weak entity== Asignacion_Vip {<br>trimestre ==partial-key==<br>}<br><br>relationship es_responsable_de {<br>Gestor_Cuentas[1..1] -> Asignacion_Vip[1..N]<br>}<br><br>==weak relationship== asigna_a{<br>Asignacion_Vip[1..N] -><br>Cliente_Vip[1..1]  <br>} | ![](../imgs/BD%20-%20BigER%20Debil%20Asignacion%20VIP%20Foco%20Cliente%20Vip.png) |
 
 ---
 ##### 5.4.2.3 Caso 2.3: Dependencia Simple Obligatoria
 
 - **La Regla de Negocio**: En una fecha concreta, una instancia de la Entidad1 solo puede relacionarse con **una** instancia de la Entidad2, pero una instancia de la Entidad2 puede relacionarse con **varias** de la Entidad1.
     
-- **Análisis**: Debemos encontrar el lado de la relación que garantiza la unicidad cuando se combina con la fecha. El lado "1" de la relación es el que nos sirve.
+- **Análisis**: Debemos encontrar el lado de la relación que garantiza la unicidad cuando se combina con la fecha. El lado "1" de la relación es el que nos sirve, es decir, la entidad que en una fecha concreta solo se relaciona con una de la otra.
     
 - **Solución de Diseño**: La entidad débil histórica **debe depender obligatoriamente de la Entidad1**, es decir, la que solo puede tener una relación en esa fecha.
 
@@ -866,9 +879,9 @@ Sin embargo, la clave para un diseño correcto es decidir de qué entidad o enti
 	    - `fecha_inicio` la clave parcial que aporta `Historial_Departamento`
         
 
-| BigER                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Crow's foot                                                               |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| `entity` Empleado {<br>id_empleado `key`<br>dni `//UNIQUE`<br>nombre<br>apellido_1<br>apellido_2<br>}<br><br>`entity` Departamento {<br>id_departamento `key`<br>nombre<br>}<br><br>==weak entity== Historial_Departamento {<br>fecha_inicio ==partial-key==<br>}<br><br>==weak relationship== ha_trabajado {<br>Empleado[`1..1`] -> Historial_Departamento[`0..N`]<br>}<br><br>`relationship` pertenece_a {<br>Historial_Departamento[`0..N`] -> Departamento[`1..1`]<br>} | ![](../imgs/BD%20-%20BigER%20Debil%20Historial%20Dpto%20Crows%20Foot.png) |
+| BigER                                                                                                                                                                                                                                                                                                                                                                                                                                                              | Crow's foot                                                        |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| entity Empleado {<br>id_empleado key<br>dni unique<br>nombre<br>apellido_1<br>apellido_2<br>}<br><br>entity Departamento {<br>id_departamento key<br>nombre<br>}<br><br>==weak entity== Historial_Departamento {<br>fecha_inicio ==partial-key==<br>fecha_fin<br>}<br><br>==weak relationship== ha_trabajado {<br>Empleado[1..1] -> Historial_Departamento[0..N]<br>}<br><br>relationship pertenece_a {<br>Historial_Departamento[0..N] -> Departamento[1..1]<br>} | ![](../imgs/BD%20-%20BigER%20Debil%20Historial%20Departamento.png) |
 ###### Ejemplo 5.4.2.3.2: Asignación de Tutor Académico 
 
 - **Entidades**: `Estudiante`, `Tutor`.
@@ -889,20 +902,20 @@ Sin embargo, la clave para un diseño correcto es decidir de qué entidad o enti
 
 1. Creamos la entidad débil `Asignacion_Tutoria`.
     
-2. La dependencia es obligatoria y debe ser sobre la entidad `Estudiante`, que es el lado "N" de la relación.
+2. La dependencia es obligatoria y debe ser sobre la entidad `Estudiante`.
 
 3. Su clave primaria es la combinación de dos piezas de información:
 	    - `id_estudiante` por la relación débil que tiene con `Estudiante`
-	    - `semestre` la clave parcial que aporta `Asignacion_tutoria`
+	    - `semestre` la clave parcial que aporta `Asignacion_Tutoria`
 
-| BigER                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Crow's foot                                                                   |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| `entity` Estudiante {<br>id_estudiante `key`<br>nombre<br>apellido_1<br>apellido_2<br>}<br><br>`entity` Tutor {<br>id_tutor `key`<br>nombre<br>apellido_1<br>apellido_2<br>}<br><br>==weak entity== Asignacion_Tutoria {<br>semestre `partial-key`<br>}<br><br>==weak relationship== tiene_asignado {<br>Estudiante[`1..1`] -> Asignacion_Tutoria[`0..N`]<br>}<br><br>`relationship` es_realizada_por {<br>Asignacion_Tutoria[`0..N`] -> Tutor[`1..1`]<br>} | ![](../imgs/BD%20-%20BigER%20Debil%20Asignacion%20Tutoria%20Crows%20Foot.png) |
+| BigER                                                                                                                                                                                                                                                                                                                                                                                                                                         | Crow's foot                                                    |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| entity Estudiante {<br>id_estudiante key<br>nombre<br>apellido_1<br>apellido_2<br>}<br><br>entity Tutor {<br>id_tutor key<br>nombre<br>apellido_1<br>apellido_2<br>}<br><br>==weak entity== Asignacion_Tutoria {<br>semestre ==partial-key==<br>}<br><br>==weak relationship== tiene_asignado {<br>Estudiante[1..1] -> Asignacion_Tutoria[0..N]<br>}<br><br>`relationship` es_realizada_por {<br>Asignacion_Tutoria[0..N] -> Tutor[1..1]<br>} | ![](../imgs/BD%20-%20BigER%20Debil%20Asignacion%20Tutoria.png) |
 
 ---
-### 5.5: Un caso especial: las entidades asociativas para  relacionar una entidad con una  relación M:N.
+### 5.5. Un caso especial: las entidades asociativas para  relacionar una entidad con una  relación M:N.
 
-El modelo Entidad-Relación tiene una regla fundamental e inquebrantable: **una relación solo puede conectar entidades: es imposible que una relación conecte directamente con otra relación.** Un verbo no puede ser el sujeto de otra acción.. Un verbo no puede ser el sujeto de otra acción. Pero, en el modelado de datos, a veces nos encontramos que una interacción de **muchos-a-muchos (M:N) sin repetición** es tan importante que necesitamos conectarla con otras entidades.
+El modelo Entidad-Relación tiene una regla fundamental e inquebrantable: **una relación solo puede conectar entidades: es imposible que una relación conecte directamente con otra relación.** Un verbo no puede ser el sujeto de otra acción. Pero, en el modelado de datos, a veces nos encontramos que una interacción de **muchos-a-muchos (M:N) sin repetición** es tan importante que necesitamos conectarla con otras entidades.
 
 #### El Problema Guiado: Asignación de Competencias a Puestos de Trabajo
 
@@ -926,28 +939,28 @@ La solución es transformar la relación "requiere" en una entidad asociativa qu
 
 Una entidad asociativa es, por tanto, un híbrido: nace de una relación M:N para darle cuerpo y permitir que se conecte con otras partes del modelo. Se comporta como una **tabla `join` en el mundo real**, existiendo únicamente para conectar dos conceptos y cuya identidad es la combinación de las dos cosas que conecta.
 
-**Paso 1: Convertir la Relación en una Entidad (el Puente)** Transformamos la relación en una entidad. Es decir, la relación M:N se convierte en la entidad asociativa `Requisito_de_Puesto`. Cada instancia de esta nueva entidad representa el hecho único y no repetible de que un puesto específico requiere una competencia específica.
+**Paso 1: Convertir la Relación en una Entidad (el Puente)** Transformamos la relación en una entidad. Es decir, la relación M:N se convierte en la entidad asociativa `Requisito_Puesto`. Cada instancia de esta nueva entidad representa el hecho único y no repetible de que un puesto específico requiere una competencia específica.
 
-**Paso 2: Analizar la Identidad del Puente (La Clave Compuesta)** Esta nueva entidad `Requisito_de_Puesto` **no aporta ningún identificador propio**. Es, por naturaleza, una entidad débil. Conceptualmente es una entidad dependiente (su identidad se compone de las claves de las entidades que une), pero como BigER no soporta este constructo, la representamos como entidad normal con las dos claves y el prefijo `Asoc_`. En el dibujo a mano recuperamos su naturaleza especial con el rombo dentro del rectángulo. Su única identidad es la combinación de las claves de las entidades que une. No necesita una clave parcial propia porque la relación no se repite; un puesto solo requiere una competencia una vez.
+**Paso 2: Analizar la Identidad del Puente (La Clave Compuesta)** Esta nueva entidad `Requisito_Puesto` **no aporta ningún identificador propio**. Se parece a una débil en que se identifica por otras, pero se diferencia en que no aporta clave parcial. Conceptualmente es una entidad dependiente y su única identidad es la combinación de las claves de las entidades que une. No necesita una clave parcial propia porque la relación no se repite; un puesto solo requiere una competencia una vez.
 
-- **Clave Primaria 🔑 = {id_puesto (FK), id_competencia (FK)}**
+- **Clave Primaria 🔑 = {id_puesto, id_competencia}**
     
 
-**Paso 3: Usar el Puente para Conectar** Ahora que `Requisito_de_Puesto` es una entidad, ya podemos conectarla con `Validador` a través de una nueva relación binaria, `es_validado_por`.
+**Paso 3: Usar el Puente para Conectar** Ahora que `Requisito_Puesto` es una entidad, ya podemos conectarla con `Validador` a través de una nueva relación binaria, `validado_por`.
 
 >[!tip] De la Idea al Diagrama - Modelando con BigER y Crow's Foot
 > 
 > | Concepto                     | BigER / Crow's foot                                                                                                                                                                                                                                                                                                                                                  |
 | ---------- | ---------------------------------------------------------------------------------------------- |
-| Entidad asociativa en Big ER | `entity` **Entidad_1** {<br>id__entidad_1 `key` <br>atributos_de_1 <br> } <br> `entity` **Entidad_2** {<br>id_entidad_2 `key` <br>atributos_de_2 <br> } <br> <br> // Entidad asociativa que ==cosifica== la relación M:N <br> // Su clave primaria es la combinación de `id_entidad_1` e `id_entidad_2`<br> // No es soportada por BigER, lo que haremos es comenzar siempre el nombre de este tipo de entidades con Asoc_ y pondremos los dos atributos claves de las entidades que asocia como claves de la entidad asociativa <br>  `entity` ==Asoc_Entidad_12== { <br> ==id_entidad_1== `key` <br> ==id_entidad_2== `key` <br> } <br> <br> // Las relación original M:N ahora son dos relaciones 1:N hacia la entidad asociativa. <br> `relationship` ==entidad1_participa_en== {<br> Entidad_1 [`1..1`] -> ==Asoc_Entidad_12==[`0..N`] <br> } <br><br> `relationship` ==entidad2_participa_en== {<br>Entidad_2[`1..1`] -> ==Asoc_Entidad_12==[`0..N`] <br> }<br><br>// Una tercera entidad que necesita relacionarse con la *interacción* entre A y B.<br> `entity` Entidad_a_Relacionar {<br>id_entidad_a_relacionar `key`<br>atributos_de_entidad_a_relacionar <br>}  <br><br>// Ahora, la entidad asociativa, al ser una entidad, puede participar en otras relaciones.<br> `relationship` relacion_entidad_asociativa_entidad_a_relacionar {<br>==Asoc_Entidad_12==[`0..N`] -> Entidad_a_Relacionar[`1..1`]<br>}|
-|                              | **En el diagrama generado por BigER lo veremos gráficamente como una entidad normal**<br>![](../imgs/BD%20-%20BigER%20Entidad%20Asociativa%20Crows%20Foot.png)<br>**Cuando lo dibujemos a mano, pondremos un rombo dentro del rectángulo de la entidad asociativa**<br>![](../imgs/BD%20-%20BigER%20Entidad%20Asociativa%20Rombo%20Crows%20Foot.png)                                                                                   |
+| Entidad asociativa en BigER | entity Entidad_1 {  <br>id_entidad_1 key  <br>atributos_de_1  <br>}  <br>  <br>entity Entidad_2 {  <br>id_entidad_2 key  <br>atributos_de_2  <br>}  <br>  <br>// Una tercera entidad que necesita relacionarse con la **interacción** entre Entidad_1 y Entidad_2.  <br>entity Entidad_Externa {  <br>id_entidad_a_relacionar key  <br>atributos_entidad_ea_relacionar  <br>}  <br>  <br>// La relación M:N se =="cosifica"== en una entidad asociativa.  <br>// Esta entidad representa una instancia única de la relación.  <br>// ==No se añade ningún atributo como clave primaria ni como clave parcial, como en el caso de las débiles==, porque su clave es la combinación de las claves primarias de Entidad_1 y Entidad_2 sin ningún añadido más y no se vuelve a escribir en la entidad asociativa.  <br>//==Entidad_Asociativa_entre_1_y_2== es el nombre que le damos a la entidad asociativa. Puede ser el nombre que consideremos que mejor represente a la entidad asociativa<br>==**associative entity** Entidad_Asociativa_entre_1_y_2== {  <br>}  <br>  <br>// Las relaciones originales M:N ahora son dos relaciones asociativas (associative relationship) 1:N hacia la entidad asociativa.  <br>  <br>==**associative relationship** entidad1_participa_en== {  <br>Entidad_1[1..1] -> ==Entidad_Asociativa_entre_1_y_2==[1..N]  <br>}  <br>  <br>==**associative relationship** entidad2_participa_en== {  <br>Entidad_2[1..1] -> ==Entidad_Asociativa_entre_1_y_2==[1..N]  <br>}  <br>  <br>// Ahora, la entidad asociativa, al ser una entidad, puede participar en otras relaciones.  <br>relationship relacion_entidad_externa_entidad_asociativa {  <br>==Entidad_Asociativa_entre_1_y_2==[0..N] -> Entidad_Externa[1..1]<br>} |
+|                              | **En el diagrama generado por BigER lo veremos gráficamente como un rombo dentro del rectángulo de la entidad asociativa** ![](../imgs/BD%20-%20BigER%20Entidad%20Asociativa.png)                                                                                   |
 
 Ahora ya podemos modelar correctamente el ejemplo:
 
-| BigER / Crow's foot                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `entity` Puesto_de_Trabajo {<br>id__puesto `key`<br>nombre<br>}<br><br>`entity` Competencia {<br>id_competencia `key`<br>nombre<br>}<br><br>// Entidad asociativa que "cosifica" la relación M:N<br>// Su clave primaria es la combinación de id_puesto e id_competencia<br>//**No es soportada por BigER, lo que haremos es comenzar siempre el nombre de este tipo de entidades con Asoc_ y pondremos los dos atributos claves de las entidades que asocia como claves de la entidad asociativa**<br>`entity` ==Asoc_Requisito_Puesto== {<br>==id_puesto key==<br>==id_competencia key==<br>}<br><br>// Relaciones que forman la entidad asociativa<br>`relationship` requiere {<br>Puesto_de_Trabajo[`1..1`] -> ==Asoc_Requisito_Puesto==[`1..N`]<br>}<br><br>```relationship``` es_requerida_por {<br>Competencia[`1..1`] -> ==Asoc_Requisito_Puesto==[`0..N`]<br>}<br><br>// La entidad asociativa ahora puede relacionarse con otras entidades<br><br>`entity` Validador {<br>id_validador `key`<br>rol_empresa<br>}<br><br>```relationship``` validada_por {<br>==Asoc_Requisito_Puesto==[`0..N`] -> Validador[`1..1`]<br>} |
-| **En el diagrama generado por BigER lo veremos gráficamente como una entidad normal**<br><br> ![](../imgs/BD%20-%20BigER%20Entidad%20Asociativa%20Ejemplo%20Crows%20Foot.png)<br><br>**Cuando lo dibujemos a mano, pondremos un rombo dentro del rectángulo de la entidad asociativa**<br><br>![](../imgs/BD%20-%20BigER%20Entidad%20Asociativa%20Ejemplo%20Rombo%20Crows%20Foot.png)<br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| BigER / Crow's foot                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| entity Puesto_de_Trabajo {<br>id_puesto key<br>nombre_puesto<br>}<br>  <br>entity Competencia {<br>id_competencia key<br>nombre_competencia<br>}<br>  <br>// Una tercera entidad, Validador, que necesita relacionarse con la **interacción** entre Puesto_de_Trabajo y Competencia.  <br>entity Validador {<br>id_validador key<br>rol_empresa<br>} <br>  <br>// La relación M:N se =="cosifica"== en una entidad asociativa.  <br>// Esta entidad representa una instancia única de la relación.  <br>// ==No se añade ningún atributo como clave primaria ni como clave parcial, como en el caso de las débiles==, porque su clave es la combinación de las claves primarias de Puesto_de_Trabajo y Competencia sin ningún añadido más y no se vuelve a escribir en la entidad asociativa.  <br>**associative entity** ==Requisito_Puesto== {  <br>}  <br>  <br>// Las relaciones originales M:N ahora son dos relaciones 1:N hacia la entidad asociativa.  <br>  <br>**associative relationship** requiere {  <br>Puesto_de_Trabajo[1..1] -> ==Requisito_Puesto==[1..N]  <br>}  <br>  <br>**associative relationship** es_requerida_por {  <br>Competencia [1..1] -> ==Requisito_Puesto==[1..N]  <br>}  <br>  <br>// Ahora, la entidad asociativa, al ser una entidad, puede participar en otras relaciones.  <br>relationship validado_por {  <br>==Requisito_Puesto==[0..N] -> Validador[1..1]<br>} |
+| ![](../imgs/BD%20-%20BigER%20Entidad%20Asociativa%20Ejemplo.png)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 **El Modelo Final y su Significado:** El diagrama final representa la realidad de forma lógica y correcta:
 
 Este modelo nos permite leer dos hechos de negocio distintos y conectados:
@@ -957,7 +970,7 @@ Este modelo nos permite leer dos hechos de negocio distintos y conectados:
 2. **Hecho 2**: Ese `Requisito_Puesto` específico es certificado por un `Validador`.
 #### Nota Importante: La Ausencia de Repetición en el Tiempo
 
-Es crucial entender que este patrón funciona porque asumimos que la relación M:N **no se repite**. Un puesto requiere una competencia una sola vez. Si la relación pudiera repetirse (por ejemplo, si se revisaran las competencias de los puestos cada año y quisiéramos guardar el histórico), la entidad `Requisito_Puesto` necesitaría un atributo adicional en su clave (`año`) para distinguir las repeticiones. En ese momento, estaríamos en el caso de **modelar una relación M:N con repetición de relaciones entre instancias**, donde en este caso aplicaríamos lo que hemos visto sobre entidades y relaciones débiles que hemos visto anteriormente.
+Es crucial entender que este patrón funciona porque asumimos que la relación M:N **no se repite**. Un puesto requiere una competencia una sola vez. Si la relación pudiera repetirse (por ejemplo, si se revisaran las competencias de los puestos cada semestre y quisiéramos guardar el histórico), la entidad `Requisito_Puesto` necesitaría un atributo adicional en su clave (`semestre`) para distinguir las repeticiones. En ese momento, estaríamos en el caso de **modelar una relación M:N con repetición de relaciones entre instancias**, donde en este caso aplicaríamos lo que hemos visto anteriormente sobre entidades y relaciones débiles.
 
 ---
 ### 5.6 Versión final correcta del Diagrama ER de Empresa
@@ -968,15 +981,15 @@ Con los nuevos conocimientos, ya podemos hacer el diagrama ER de Empresa complet
 
 1. El atributo multivalor `ubicaciones` de `Departamento` se ha convertido en la entidad débil `Ubicacion_Departamento`, con la relación débil `ubicado_en` (Departamento[1..1] → Ubicacion_Departamento[1..N]).
 2. `Familiar` ha pasado de entidad fuerte con clave `nombre` (¡que no garantizaba unicidad!) a **entidad débil** con clave parcial `nombre` y relación débil `familiar_de`.
-3. La cardinalidad de `familiar_de` en el lado de `Empleado` pasa de (0,1) a **(1,1)**: un familiar no puede existir sin su empleado. Todo lo demás (relaciones, cardinalidades y atributos de relación) ya era correcto.
 
-![BD Empresa versión final - BigER](../imgs/BD%20Empresa%20versión%20final%20Crows%20Foot.png)
+
+![BD Empresa versión final - BigER](../imgs/BD%20-%20BigER%20Empresa%20version%20final%20correcta.png)
 >[!exercise] Ejercicio
-> Prueba la solución propuesta en  [BigER]( https://marketplace.visualstudio.com/items?itemName=BIGModelingTools.erdiagram) en Visual Code y prueba a mostrar la solución con las distintas notaciones además de en Crow's foot. Intenta ver las diferencias más significativas entre cada notación soportada.
+> Prueba la solución propuesta en  [BigER]( https://marketplace.visualstudio.com/items?itemName=BIGModelingTools.erdiagram) en Visual Studio Code y prueba a mostrar la solución con las distintas notaciones además de en Crow's foot. Intenta ver las diferencias más significativas entre cada notación soportada.
 
 
 ---
-## 6: Relaciones de Grado Superior (N-arias)
+## 6. Relaciones de Grado Superior (N-arias)
 
 ### 6.1 El Concepto Clave: El "Hecho Indivisible"
 
@@ -1009,7 +1022,7 @@ Una relación ternaria **solo** debe usarse en ese segundo caso: cuando el hecho
 
 ### 6.2 Caso de Uso Correcto: La Verdadera Relación Ternaria
 
-Usamos una relación ternaria cuando existe un atributo descriptivo (como `Cantidad`, `Precio`, `Nota`) que no pertenece a ninguna de las entidades ni a ninguna pareja de ellas, sino **única y exclusivamente a la combinación de todas**.
+Usamos una relación ternaria cuando existe un atributo descriptivo (como `cantidad`, `precio`, `nota`) que no pertenece a ninguna de las entidades ni a ninguna pareja de ellas, sino **única y exclusivamente a la combinación de todas**.
 
 #### Ejemplo: La Relación `suministra`
 
@@ -1043,14 +1056,14 @@ Este es un evento ternario. Si intentáramos "descomponer" esto en tres relacion
 > | Concepto          | BigER / Crow's foot                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Relación ternaria | `entity` Entidad_1 {<br>id_entidad_1 `key`<br>}<br>`entity` Entidad_2 {<br>id_entidad_2 `key`<br>}<br>`entity` Entidad_3 {<br>id_entidad_3 `key`<br>}<br>// simplemente añadimos una nueva flecha y la tercera entidad a relacionar junto con su cardinalidad mínima y máxima con respecto al otro par de entidades<br>`relationship` relacion_ternaria {<br>Entidad_1[`1..N`] ==->== Entidad_2[`1..N`] ==->== Entidad_3[`1..N`]<br>atributos_relacion_ternaria<br>} |
-|                   | ![](../imgs/BD%20-%20BigER%20Ternaria%20Crows%20Foot.png)                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+|                   | ![](../imgs/BD%20-%20BigER%20Ternaria%20Teorica.png)                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 
 Nuestro ejemplo quedaría modelado así:
 
-| BigER / Crow's foot                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `entity` Proveedor {<br>id__proveedor_ `key`<br>}<br>```entity``` Proyecto {<br>id_proyecto `key`<br>}<br>```entity``` Repuesto {<br>id_repuesto `key`<br>}<br>// simplemente añadimos una nueva flecha y la tercera entidad a relacionar junto con su cardinalidad mínima y máxima con respecto al otro par de entidades<br>```relationship``` suministra {<br>Proveedor[`1..N`] ==->== Proyecto[`1..N`] ==->== Repuesto[`1..N`]<br>cantidad<br>} |
-| ![](../imgs/BD%20-%20BigER%20Ternaria%20Proveedor%20Proyecto%20Suministro%20Crows%20Foot.png)                                                                                                                                                                                                                                                                                                                                                      |
+| BigER / Crow's foot                                                                                                                                                                                                                                                                                                                                                                                              |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| entity Proveedor {<br>id_proveedor key<br>}<br>entity Proyecto {<br>id_proyecto key<br>}<br>entity Repuesto {<br>id_repuesto key<br>}<br>// simplemente añadimos una nueva flecha y la tercera entidad a relacionar junto con su cardinalidad mínima y máxima con respecto al otro par de entidades<br>relationship suministra {<br>Proveedor[1..N] ==->== Proyecto[1..N] ==->== Repuesto[1..N]<br>cantidad<br>} |
+| ![](../imgs/BD%20-%20BigER%20Ternaria%20Proveedor%20Proyecto%20Suministro.png)<br>                                                                                                                                                                                                                                                                                                                               |
 
 ---
 ### 6.3 Caso de Uso Incorrecto: El "Falso Ternario"
@@ -1058,42 +1071,42 @@ Nuestro ejemplo quedaría modelado así:
 Este es el error más común. Ocurre cuando un escenario _parece_ ternario, pero en realidad se puede descomponer en hechos binarios independientes.
 #### Contraejemplo: La Relación `imparte`
 
-Imagina que necesitamos modelar el horario de clases. Tenemos tres entidades:
+Imagina que necesitamos modelar el horario de clases de un curso concreto. Tenemos tres entidades:
 
-- `Profesor`
+* `Profesor`
+* `Asignatura`
+* `Aula`
     
-- `Asignatura`
-    
-- `Aula`
-    
-
-El "hecho" que queremos registrar parece un único evento: "La `Profesora Sanz` imparte `Bases de Datos` en el `Aula 101`."
+El "hecho" que queremos registrar parece un único evento: "La `Profesora Sanz` imparte `Matemáticas` en el `Aula 101`."
 
 **La Prueba de la Descomposición:** ¿Podemos separar este "hecho" en reglas de negocio más pequeñas que sigan teniendo sentido por sí solas?
 
-1. Hecho 1: ¿Profesor imparte Asignatura?
+1. Hecho 1: ¿Qué profesores imparten cada asignatura?
     
-    ¿Es "La Profesora Sanz es la responsable de Bases de Datos" un hecho válido por sí mismo, incluso si aún no sabemos el aula? Sí. Es la asignación docente.
+    La Profesora Sanz imparte Matemáticas" es un hecho válido por sí mismo, aunque todavía no se sepa en qué aula. Además, una asignatura puede tener varios profesores: Matemáticas tiene dos grupos, uno con la profesora Sanz y otro con el profesor Gil. Es el **encargo docente**, una relación M:N entre `Profesor` y `Asignatura`.
     
-2. Hecho 2: ¿Asignatura se da en un Aula?
+1. Hecho 2: ¿En qué aula se imparte cada encargo docente?
     
-    ¿Es "La asignatura Bases de Datos se imparte en el Aula 101" un hecho válido? Sí. Es la asignación de recursos, independientemente de qué profesor la imparta ese año.
-    
+    La profesora Sanz da su grupo de Matemáticas en el Aula 101 y el profesor Gil el suyo en el Aula 204. El aula no es un dato de la asignatura, porque Matemáticas se da en dos aulas distintas, ni del profesor, porque la profesora Sanz puede dar otra asignatura en otra aula. Es un dato **del encargo docente**, es decir, de la pareja profesor-asignatura.
 
-Como podemos separar el "hecho" principal en dos reglas de negocio independientes, **no debemos usar una relación ternaria**.
+Como el hecho principal se descompone en un hecho que existe por sí solo (el encargo docente) y otro que se apoya en él (el aula de cada encargo), **es divisible**. Por tanto, no es una relación ternaria y lo modelamos con relaciones binarias.
 
-La Solución Correcta (y más flexible):
+**La Solución Correcta (y más flexible):**
 
-Lo correcto es modelar esto como dos relaciones binarias. La forma más correcta de hacerlo es convertir la relación Profesor-Asignatura en una entidad asociativa (que podemos llamar Asoc_Docencia) y luego conectar esta nueva entidad con Aula.
+Convertimos la relación M:N entre `Profesor` y `Asignatura` en una entidad asociativa, `Encargo_Docente`, y relacionamos esa entidad con `Aula`. El modelo queda con tres relaciones binarias: dos relaciones asociativas que identifican cada encargo y una relación normal que le asigna el aula.
+
+| BigER / Crow's foot                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| entity Profesor {<br>nif key<br>nombre<br>apellido_1<br>apellido_2<br>}<br><br>entity Asignatura {<br>codigo key<br>nombre<br>}<br><br>entity Aula {<br>id_aula key<br>nombre unique<br>ubicacion<br>}<br><br>associative entity Encargo_Docente {<br>}<br><br>associative relationship imparte {<br>Profesor[1..1] -> Encargo_Docente[1..N]<br>}<br><br>associative relationship corresponde_a {<br>Asignatura[1..1] -> Encargo_Docente[1..N]<br>}<br><br>relationship se_imparte_en {<br>Encargo_Docente[0..N] -> Aula[0..1]<br>} |
+| ![](../imgs/BD%20-%20BigER%20Ternaria%20Falsa.png)<br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 
 Este modelo es superior porque:
 
-- **Es preciso**: Refleja las dos reglas de negocio separadas.
+- **Es preciso**: refleja por separado el encargo docente y el aula de cada encargo.
     
-- **Es flexible**: Permite que un `Profesor` esté asignado a una `Asignatura` (Hecho 1) incluso antes de que se le asigne un `Aula` (Hecho 2).
+- **Es flexible**: permite registrar que un `Profesor` tiene encargada una `Asignatura` (Hecho 1) antes de que se le asigne un `Aula` (Hecho 2).
     
-- **Maneja excepciones**: ¿Qué pasa si la `Asignatura` es "Prácticas Externas" y no tiene `Aula`? Este modelo lo permite; el ternario no.
-    
+- **Maneja excepciones**: si la asignatura es "Prácticas Externas" y no tiene aula, el encargo existe igualmente. Con una relación ternaria no se podría registrar, porque cada instancia exige los tres participantes.    
 
 ---
 ### 6.4 La Gran Lección: ¿Ternaria o Binaria?
@@ -1108,7 +1121,7 @@ Para decidir, hazte esta pregunta:
 
 ---
 
-## 7: Más Allá del E/R Básico - El Modelo Extendido (EER)
+## 7. Más Allá del E/R Básico - El Modelo Extendido (EER)
 
 ### 7.1 Introducción: Enriqueciendo el Modelo
 
@@ -1118,7 +1131,7 @@ El EER incluye **todos los conceptos del E/R básico** (entidades, atributos, re
 
 - **Subclases y Superclases**: Para representar tipos específicos dentro de una entidad general.
     
-- **Especialización y Generalización**: Los procesos para crear estas jerarquías.
+- **Especialización y Generalización**: Los procesos para crear estas jerarquías de herencia.
     
 - **Herencia**: Cómo las subclases heredan propiedades.
     
@@ -1153,7 +1166,7 @@ La relación entre una superclase y sus subclases se conoce como **"ES UN"** (IS
     
 2. **Existencia Dependiente**: Una instancia no puede existir _solo_ como miembro de una subclase; **debe** pertenecer también a la superclase.
     
-3. **Pertenencia Opcional (por defecto)**: Una instancia de la superclase puede pertenecer a ninguna, una, o varias subclases, dependiendo de las reglas específicas que definamos Por ejemplo, un empleado que es gerente e ingeniero pertenecería a ambas subclases (`Gerente` e `Ingeniero`) además de a `Tiempo_Completo` si esa es su jornada.
+3. **Pertenencia Opcional (por defecto)**: Una instancia de la superclase puede pertenecer a ninguna, una, o varias subclases, dependiendo de las reglas específicas que definamos. Por ejemplo, un empleado que es Ingeniero a Tiempo Completo pertenecería a ambas subclases ( `Ingeniero` y `Tiempo_Completo`).
     
 
 ---
@@ -1186,53 +1199,44 @@ Precisamente por la herencia, **solo debemos crear una subclase si esta aporta a
 ---
 ### 7.4 Restricciones: Las Reglas de la Jerarquía
 
-Podemos (y debemos) definir reglas precisas sobre cómo funcionan nuestras especializaciones. Hay dos tipos de restricciones:
+Podemos (y debemos) definir reglas precisas sobre cómo funcionan nuestras jerarquías de herencia. Hay dos tipos de restricciones:
 #### A) Restricción de Completitud (¿Obligatorias o No?)
 
 Controla si todos los miembros de la superclase deben pertenecer a alguna subclase.
-
-- **Total (t)** : **Toda** entidad de la superclase **debe** pertenecer a **al menos una** de las subclases. No hay "huecos". Las generalizaciones suelen ser totales.
-    
-    - _Ejemplo_: `{Tiempo_Completo, Tiempo_Parcial}` es total. Todo empleado tiene una de esas dos jornadas.
+- **Total (total al definir la jerarquía en BigER)** : 
+	- **Toda** entidad de la superclase **debe** pertenecer a **al menos una** de las subclases. No hay "huecos". Las generalizaciones suelen ser totales.
+	    - _Ejemplo_: `{Tiempo_Completo, Tiempo_Parcial}` es total. Todo empleado tiene una de esas dos jornadas.
         
-- **Parcial (p)** : Una entidad de la superclase **puede no pertenecer a ninguna** de las subclases.
-    
-    - _Ejemplo_: `{Administrativo, Tecnico, Ingeniero}` es parcial. Puede haber empleados que no sean ninguno de los tres (como un `Gerente`).
+- **Parcial (partial al definir la jerarquía en BigER)** : 
+	- Una entidad de la superclase **puede no pertenecer a ninguna** de las subclases.
+        - _Ejemplo_: `{Administrativo, Tecnico, Ingeniero}` es parcial. Puede haber empleados que no sean ninguno de los tres (como un `Gerente`).
         
 #### B) Restricción de Disyunción (¿Exclusivas o No?)
 
 Controla si las subclases pueden compartir miembros.
 
-- **Disjunta (d)** : Las subclases son **mutuamente excluyentes**. Una entidad de la superclase puede pertenecer, como máximo, a **una** de las subclases.
-    
-    - _Ejemplo_: `{Administrativo, Tecnico, Ingeniero}` es disjunta. No puedes ser dos a la vez.
+- **Disjunta (disjoint al definir la jerarquía en BigER)** : 
+	- Las subclases son **mutuamente excluyentes**. Una entidad de la superclase puede pertenecer, como máximo, a **una** de las subclases.
+        - _Ejemplo_: `{Administrativo, Tecnico, Ingeniero}` es disjunta. No puedes ser dos a la vez.
         
-- **Solapada (s)** : Las subclases **pueden compartir miembros**. Una entidad puede pertenecer a **más de una** subclase simultáneamente.
-    
-    - _Ejemplo_: Si tuviéramos una especialización `{Investigador, Docente}`, podría ser solapada, ya que un empleado podría ser ambas cosas.
+- **Solapada (overlapping al definir la jerarquía en BigER)** : 
+	- Las subclases **pueden compartir miembros**. Una entidad puede pertenecer a **más de una** subclase simultáneamente.
+        - _Ejemplo_: Si tuviéramos una especialización `{Investigador, Docente}`, podría ser solapada, ya que un empleado podría ser ambas cosas.
         
 
 #### Combinaciones Posibles
 
-|                                                                                                                                       | total (t)                          | parcial (p)                      |
-| ------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- | -------------------------------- |
-| Toda instancia del supertipo está en alguno de los subtipos <br>=<br>La unión de todas las instancias de los subtipos da el supertipo | SÍ  <br>∪ Subtipos <br>= Supertipo | NO <br>∪ Subtipos ≠<br>Supertipo |
+Estas restricciones se combinan dando lugar a cuatro tipos de jerarquías:
 
-|                                                                                                                                         | disjunta (d)               | solapada (s)                |
-| --------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- | --------------------------- |
-| Cada instancia del supertipo puede estar como máximo en un subtipo <br>= <br>La intersección de las instancias de los subtipos es vacía | SÍ  <br>∩ Subtipos <br>= ∅ | NO <br>∩ Subtipos  <br>≠  ∅ |
-
-Estas restricciones se combinan dando lugar a cuatro tipos de especialización:
-
-1. **Total y Disjunta (t, d)**: Pertenencia obligatoria y a exactamente una subclase.
+1. **Total y Disjunta (total disjoint)**: Una instancia pertenece obligatoriamente a una y solo una subclase.
     
-2. **Total y Solapada (t, s)**: Pertenencia obligatoria y a una o más subclases.
+2. **Total y Solapada (total overlapping)**: Una instancia pertenece obligatoriamente a al menos una subclase.
     
-3. **Parcial y Disjunta (p, d)**: Pertenencia opcional y a como máximo una subclase.
+3. **Parcial y Disjunta (partial disjoint)**: Una instancia puede pertenecer, como mucho, a una subclase o no pertenecer a ninguna.
     
-4. **Parcial y Solapada (p, s)**: Pertenencia opcional y a cero, una o varias subclases.
+4. **Parcial y Solapada (partial overlapping)**: Una instancia puede pertenecer a ninguna, a una o a varias subclases.
     
-    (Existe un caso especial si la especialización solo tiene una subclase, donde solo aplica la restricción parcial).
+    (Existe un caso especial si la jerarquía solo tiene una subclase, donde solo aplica la restricción parcial).
     
 
 ---
@@ -1241,7 +1245,7 @@ Estas restricciones se combinan dando lugar a cuatro tipos de especialización:
 > 
 > | Concepto                         | BigER                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | Crow's foot                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Especialización / Generalización | `entity` ==Superclase== {<br>==id_superclase== `key`<br>==atributos_superclase==<br>}<br><br>//Subclase_1 se crea porque tiene atributos propios distintos a los de la superclase<br><br>//indicar con un comentario delante de la subclase si es ==total== o ==parcial== y si es ==solapada== o ==disjunta==<br>`entity` ==Subclase_1 extends Superclase== {<br>==id_superclase== `key`<br>==atributos_subclase==<br>}<br><br>//Subclase_2 se crea porque participa en una relacion distinta a la de la superclase<br><br>//indicar con un comentario delante de la subclase si es ==total== o ==parcial== y si es ==solapada== o ==disjunta==<br>`entity` ==Subclase_2 extends Superclase== {<br>==id_superclase== `key`<br>}<br><br>//otra entidad distinta para relacionar con la subclase2<br>`entity` Otra_Entidad {<br>id_otra_entidad `key`<br>}<br><br>//relacion entre Subclase_2 y otra entidad<br>`relationship` relacion {<br>==Subclase_2==[`1..N`] -> Otra_Entidad[`1..N`]<br>} | **En el diagrama generado por BigER lo veremos gráficamente como unas flechas blancas de las subclases a la superclase**<br>![](../imgs/BD%20-%20BigER%20Superclase%20y%20subclase%20Crows%20Foot.png)<br>**Cuando lo dibujemos a mano, pondremos una línea blanca perpendicular las flechas que pertenecen a la misma especialización/generalización y las letras t (total) o p (parcial) y s (solapada) o d (disjunta) según corresponda**<br>![](../imgs/BD%20-%20BigER%20Superclase%20y%20subclase%20Crows%20Foot%20modificado.png) |
+| Especialización / Generalización |  entity ==Superclase== {<br>==id_superclase key==<br>==atributos_superclase==<br>} <br><br>// La jerarquía es un elemento propio del modelo, con nombre.<br>// Usamos la ==palabra reservada **hierarchy** seguida del **nombre de la jerarquia**. Si nombre de jerarquia está formado por varias palabras, pondremos todas las palabras con la primera letra en minúsculas y concatenadas con el guión bajo (**nombre_jerarquia_larga**)==. <br>//==En la misma línea a continuación se escribe el nombre de la superclase de la que parte la jerarquía== <br><br>// ==En la misma línea a continuación se indican dos propiedades==:<br>// completitud: <br>// ==palabra reservada **total**==(toda instancia de la superclase pertenece a alguna subclase)<br>// ==palabra reservada **partial**== (puede haber instancias que no pertenezcan a ninguna, es la única propiedad que se usa si la jerarquía solo tiene una subclase)<br>// solapamiento: <br>//==palabra reservada **disjoint**==(una instancia no puede estar en dos subclases a la vez)<br>// ==palabra reservada **overlapping**==(una instancia sí puede estar en más de una subclase a la vez)<br>// Estamos poniendo "total disjoint" como ejemplo, pero podría ser "total overlapping", "partial disjoint", "partial overlapping" o solo "partial" si solo hay una subclase en la jerarquía.<br><br>==hierarchy nombre_jerarquia Superclase total disjoint==<br> <br>// Subclase_1 se crea porque tiene atributos propios distintos a los de la superclase.<br>// ==palabra reservada **extends** a continuación del nombre de la entidad y seguida por el **NOMBRE DE LA JERARQUÍA**, no el de la superclase==.<br><br>==entity Subclase_1 extends nombre_jerarquia== {<br>==id_superclase key==<br>==atributos_subclase_1==<br>}<br><br>// Subclase_2 se crea porque participa en una relación en la que la superclase no participa.<br>// ==palabra reservada **extends** a continuación del nombre de la entidad y seguida por el **NOMBRE DE LA JERARQUÍA**, no el de la superclase==.<br><br>==entity Subclase_2 extends nombre_jerarquia=={<br>==id_superclase key==<br>}<br><br>// Otra entidad, para relacionarla con Subclase_2<br>entity Otra_Entidad {<br>id_otra_entidad key<br>}<br><br>// Relación específica de la subclase: es lo que justifica haber creado a Subclase_2. La superclase no participa en esta relación.<br>relationship relacion {<br>==Subclase_2==[1..N] -> Otra_Entidad[1..N]<br>} | **En el diagrama generado por BigER lo veremos gráficamente como una flecha de cada subclase a las propiedades de la jerarquía y una flecha de dichas propiedades a la superclase**<br>![](../imgs/BD%20-%20BigER%20Superclase%20y%20subclase.png) |
 
 ---
 ### 7.5 Especialización y Generalización: Creando las Jerarquías
@@ -1254,20 +1258,20 @@ Es el proceso de partir de una entidad general (superclase) e identificar subgru
 
 - **Ejemplo**: Empezamos con `Empleado` y definimos las subclases `{Administrativo, Tecnico, Ingeniero}` basándonos en el tipo de puesto de trabajo. Luego, identificamos el rol `Gerente` y creamos esa subclase. Podemos tener múltiples especializaciones de la misma superclase, como `{Tiempo_Completo, Tiempo_Parcial}` basada en la jornada.
 
-| BigER                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Crow's foot                                                       |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| //superclase Empleado<br>`entity` ==Empleado== {<br>==dni== `key`<br>nombre<br>fecha_nacimiento<br>direccion<br>telefono<br>}<br><br>//==Especializacion Tipo Puesto== <br><br>//==parcial,disjunta==<br>`entity` ==Administrativo extends Empleado== {<br>==dni== ```key```<br>categoria<br>}<br><br>//==parcial,disjunta==<br>`entity` ==Tecnico extends Empleado=={<br>==dni== `key`<br>nivel<br>}<br><br>//==parcial,disjunta==<br>`entity` ==Ingeniero extends Empleado== {<br>==dni== ```key```<br>tipo_ingeniero<br>}<br><br>//==Especializacion Relacion dirige==<br><br>//==parcial==<br>`entity` ==Gerente extends Empleado== {<br>==dni== key<br>}<br><br>`entity` Proyecto {<br>cod_proyecto ```key```<br>}<br><br>`relationship` dirige{<br>==Gerente==[`1..1`] -> Proyecto[`1..N`]<br>}<br><br>//==Especializacion Tipo Jornada==<br><br>//==total,disjunta==<br>`entity` ==Empleado_Tiempo_Completo extends Empleado=={<br>==dni== `key`<br>salario<br>}<br><br>//==total,disjunta==<br>`entity` ==Empleado_Tiempo_Parcial extends Empleado=={<br>==dni== `key`<br>horas_semanales<br>}<br><br>`relationship` afiliado_a{<br>==Empleado_Tiempo_Parcial==[`1..N`] -> Sindicato[`0..1`]<br>}<br><br>`entity` Sindicato {<br>cod_sindicato `key`<br>} | ![](../imgs/BD%20-%20BigER%20Jerarquia%20Empleado%20retocada.png) |
+| BigER                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Crow's foot                                            |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
+| //==superclase== Empleado<br>entity Empleado {<br>dni key<br>nombre<br>fecha_nacimiento<br>direccion<br>telefono<br>}<br><br>//==Especialización Por Puesto, parcial,disjunta==<br>hierarchy por_puesto Empleado partial disjoint<br><br>entity Administrativo extends por_puesto {<br>dni key<br>categoria<br>}<br><br>entity Tecnico extends por_puesto {<br>dni key<br>nivel<br>}<br><br>entity Ingeniero extends por_puesto {<br>dni key<br>tipo_ingeniero<br>}<br><br>//==Especialización por_responsabilidad, parcial==<br>hierarchy por_responsabilidad Empleado partial<br><br>entity Gerente extends por_responsabilidad {<br>dni key<br>}<br><br><br>//==Especialización por_jornada, total,disjunta==<br><br>hierarchy por_jornada Empleado total disjoint<br><br>entity Tiempo_Completo extends por_jornada {<br>dni key<br>salario<br>}<br><br>entity Tiempo_Parcial extends por_jornada {<br>dni key<br>horas_semanales<br>}<br><br>entity Proyecto {<br>codigo_proyecto key<br>}<br><br>relationship dirige{<br>Gerente[1..1] -> Proyecto[1..N]<br>}<br><br>relationship afiliado_a{<br>Empleado_Tiempo_Parcial[1..N] -> Sindicato[0..1]<br>}<br><br>entity Sindicato {<br>codigo_sindicato key<br>} | ![](../imgs/BD%20-%20BigER%20Jerarquia%20Empleado.png) |
 
 #### B) Generalización (Bottom-Up)🔼
 
 Es el proceso inverso. Empezamos con varias entidades distintas, notamos que comparten atributos y relaciones comunes, y creamos una superclase general para agrupar esas características comunes. Es una síntesis **de abajo hacia arriba**.
 
-- **Ejemplo**: Modelamos `Coche` con los atributos (`id_coche`, `matricula`, `precio`, `max_velocidad` y `numero_pasajeros`) y `Camion` por separado con los atributos (`id_camion`, `matricula`, `precio`, `tonelaje` y `numero_ejes`). Al ver que comparten un id numérico, `Matricula` y `Precio`, creamos la superclase `Vehiculo` con un id llamado `id_vehiculo ` y los atributos comunes. `Coche` y `Camion` se convierten en subclases con solo sus atributos específicos (`max_velocidad`y `numero_pasajeros` para `Coche`, `tonelaje` y `numero_ejes` para `Camion`).
+- **Ejemplo**: Modelamos `Coche` con los atributos (`id_coche`, `matricula`, `precio`, `max_velocidad` y `numero_pasajeros`) y `Camion` por separado con los atributos (`id_camion`, `matricula`, `precio`, `tonelaje` y `numero_ejes`). Al ver que comparten un id numérico, `matricula` y `precio`, creamos la superclase `Vehiculo` con un id llamado `id_vehiculo ` y los atributos comunes. `Coche` y `Camion` se convierten en subclases con solo sus atributos específicos (`max_velocidad`y `numero_pasajeros` para `Coche`, `tonelaje` y `numero_ejes` para `Camion`).
     
 
-| BigER                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Crow's foot                                               |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
-| //superclase Vehiculo<br>`entity` ==Vehiculo== {<br>==id_vehiculo== ```key```<br>matricula<br>precio<br>}<br><br>//==Especializacion Tipo Vehículo, total, disjunta==<br>`entity` ==Coche extends Vehiculo== {<br>==id_vehiculo== ```key```<br>max_velocidad<br>numero_pasajeros<br>}<br><br>//==Especializacion Tipo Vehículo, total, disjunta==<br>`entity` ==Camion extends Vehiculo== {<br>==id_vehiculo== ```key```<br>tonelaje<br>numero_ejes<br>} | ![300](../imgs/BD%20-%20BigER%20Jerarquia%20Vehiculo.png) |
+| BigER                                                                                                                                                                                                                                                                                                                                                                                                                             | Crow's foot                                               |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| //==superclase== Vehiculo<br>entity Vehiculo {<br>id_vehiculo key<br>matricula<br>precio<br>}<br><br>//==Especializacion Tipo Vehículo, total, disjunta==<br>hierarchy por_tipo_vehiculo Vehiculo total disjoint<br><br>entity Coche extends por_tipo_vehiculo {<br>id_vehiculo key<br>max_velocidad<br>numero_pasajeros<br>}<br><br>entity Camion extends por_tipo_vehiculo {<br>id_vehiculo key<br>tonelaje<br>numero_ejes<br>} | ![600](../imgs/BD%20-%20BigER%20Jerarquia%20Vehiculo.png) |
 
 En la práctica, ambos procesos se suelen usar combinados. El resultado final, ya sea por especialización o generalización, es una **jerarquía** o **red** de clases.
 
@@ -1304,7 +1308,7 @@ Las relaciones superclase/subclase pueden organizarse de dos maneras:
     
 - Una subclase hereda de su padre, abuelo, etc., siguiendo la rama hacia arriba.
     
-- **Ejemplo**: La estructura de la Universidad que muestra en la siguiente figura es una jerarquía.
+- **Ejemplo**: La estructura de la Universidad que se muestra en la siguiente figura es una jerarquía.
 
 ![](../imgs/BD%20-%20BigER%20Jerarquia%20Universidad.png)
 
@@ -1318,7 +1322,7 @@ Las relaciones superclase/subclase pueden organizarse de dos maneras:
     
 - **Ejemplo**: Imagina que en nuestro ejemplo de `Empleado`, quisiéramos crear la subclase compartida `Ingeniero_JEFE` que herede de `Ingeniero`, `Gerente` y `Tiempo_Completo`.
     
-- Aunque EER lo permite, muchos sistemas pueden tener limitaciones con la herencia múltiple. BigER no lo soporta
+- Aunque EER lo permite, muchos sistemas pueden tener limitaciones con la herencia múltiple. BigER no lo soporta.
     
 
 >[!question] Pregunta

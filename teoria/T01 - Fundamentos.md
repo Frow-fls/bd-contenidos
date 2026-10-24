@@ -344,7 +344,7 @@ Se necesitan definir **mapeos entre diferentes niveles** de esquema para transfo
 - Por otro lado, los datos extraídos del nivel interno del SGBD se transforman para que coincidan con la vista externa del usuario.
 
 Además, esto permite tener **múltiples vistas de los datos**:
-- Cada usuario puede ver una vista diferente de la base de datos, que describe únicamente los datos de interés para ese usuario. Puedes ver un ejemplo más completo de [[Vistas de un SDB]].
+- Cada usuario puede ver una vista diferente de la base de datos, que describe únicamente los datos de interés para ese usuario. Puedes ver un ejemplo más completo de [[guias/Vistas de un SDB]].
 
 >[!example]+ Ejemplo de vistas derivadas de la base de datos de universidad
 > - Vista del certificado de estudios

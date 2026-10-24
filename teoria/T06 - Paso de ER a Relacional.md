@@ -129,7 +129,7 @@ Este es el caso más común para una relación 1:1.
 ![600](../imgs/BD%20-%20MapeoER03_01a11.png)
 
 - **Ejemplo**:
-	- ![200](../imgs/BD%20-%20BigER%20Relación%2001%2011%20Crows%20Foot.png)
+	- ![200](../imgs/BD%20-%20BigER%20Relación%2001%2011.png)
 	- Una `PROVINCIA` debe tener de capital _un_ `MUNICIPIO` (`[1..1]`).
 	- Un `MUNICIPIO` puede ser capital o no de _una_ `PROVINCIA` (`[0..1]`).
 	- MUNICIPIO(<u>id_municipio</u>, resto_atributos_municipio)
@@ -163,7 +163,7 @@ Este es el caso más común para una relación 1:1.
 ![600](../imgs/BD%20-%20MapeoER04_01a01.png)
 
 - **Ejemplo**:
-	- ![200](../imgs/BD%20-%20BigER%20Relación%2001%2001%20Crows%20Foot.png)
+	- ![200](../imgs/BD%20-%20BigER%20Relación%2001%2001.png)
 	- Un `TRABAJADOR` puede tener asignada(o no) _una_ `PLAZA_APARCAMIENTO` (`[0..1]`).
 	- Una `PLAZA_APARCAMIENTO` puede estar asignada (o no) a _un_ `TRABAJADOR` (`[0..1]`).
 	- TRABAJADOR(<u>id_trabajador</u>, resto_atributos_trabajador)
@@ -243,7 +243,7 @@ Suponiendo que:
 		![600](../imgs/BD%20-%20MapeoER06_11a0NyER07_11a1N.png)
 		
 		- **Ejemplo**:
-			- ![200](../imgs/BD%20-%20BigER%20Relación%2011%201N%20Crows%20Foot.png)
+			- ![200](../imgs/BD%20-%20BigER%20Relación%2011%201N.png)
 			- Una `PROVINCIA` puede tener _muchos_ `MUNICIPIO` (`[1..N]`).
 			- Un `MUNICIPIO` debe pertenecer a _una_ `PROVINCIA` (`[1..1]`).
 			- PROVINCIA(<u>id_provincia</u>,resto_atributos_provincia)
@@ -259,7 +259,7 @@ Suponiendo que:
 		![](../imgs/BD%20-%20MapeoER08_01a0NyER09_01a1N_NORMAL.png)
 		
 		- **Ejemplo**:
-			- ![200](../imgs/BD%20-%20BigER%20Relación%2001%200N%20Crows%20Foot.png)
+			- ![200](../imgs/BD%20-%20BigER%20Relación%2001%200N.png)
 			- Un `SOCIO` puede tener (o no) _muchos_ `EJEMPLAR` en préstamo (`[0..N]`). 
 			- Un `EJEMPLAR` puede estar (o no) prestado a _un_ `SOCIO` (`[0..1]`). 
 			- Se esperan mayoría de ejemplares prestados
@@ -292,7 +292,7 @@ Suponiendo que:
 		- id_E2 -> E2(id_E2) [B:C,M:C]
 	![600](../imgs/BD%20-%20MapeoER08_01a0NyER09_01a1N_EXCEPCIONAL.png)
 	- **Ejemplo**:
-		- ![200](../imgs/BD%20-%20BigER%20Relación%2001%200N%20Crows%20Foot.png)
+		- ![200](../imgs/BD%20-%20BigER%20Relación%2001%200N.png)
 		- Un `SOCIO` puede tener (o no) _muchos_ `EJEMPLAR` en préstamo (`[0..N]`). 
 		- Un `EJEMPLAR` puede estar (o no) prestado a _un_ `SOCIO` (`[0..1]`).
 		- Se esperan muchos ejemplares sin prestar
@@ -339,7 +339,7 @@ Suponiendo que:
 	![600](../imgs/BD%20-%20MapeoER10_XMaXN.png)
 
 	- **Ejemplo**:
-		- ![200](../imgs/BD%20-%20BigER%20Relación%200N%200N%20Crows%20Foot.png)
+		- ![200](../imgs/BD%20-%20BigER%20Relación%200N%200N.png)
 		- Un `TURISTA` puede visitar (o no) _muchos_ `MONUMENTO` (`[0..N]`). 
 		- Un `MONUMENTO` puede ser visitado (o no) por _muchos_ `TURISTA` (`[0..N]`).
 		- TURISTA(id_turista, resto_atributos_turista)
@@ -363,15 +363,15 @@ Este paso se aplica cuando hemos modelado una relación M:N como una **entidad a
 
 Una entidad asociativa se mapea **inicialmente de forma idéntica a la relación `RE1E2` del Paso 5 (Relaciones M:N)**. La gran diferencia no está en cómo se crea su relación, sino en **cómo se mapean las relaciones en las que participa con otras entidades**.
 
-Usaremos el ejemplo de la sección 5.5 del Tema 5 donde teníamos `Puesto_de_Trabajo` ↔ `Asoc_Requsito_Puesto` ↔ `Competencia`, donde la entidad asociativa `Asoc_Requisito_Puesto` se relaciona a su vez con `Validador`.
+Usaremos el ejemplo de la sección 5.5 del Tema 5 donde teníamos `Puesto_de_Trabajo` ↔ `Requsito_Puesto` ↔ `Competencia`, donde la entidad asociativa `Requisito_Puesto` se relaciona a su vez con `Validador`.
 
-![](../imgs/BD%20-%20BigER%20Entidad%20Asociativa%20Ejemplo%20Rombo%20Crows%20Foot.png)
+![](../imgs/BD%20-%20BigER%20Entidad%20Asociativa%20Ejemplo.png)
 
 **Regla:** El mapeo se hace en dos etapas:
 
 1. **Mapear la Entidad Asociativa (Igual que Paso 5):**
     
-    - Primero, la entidad asociativa (ej: `Asoc_Requisito_Puesto`) se convierte en una **nueva relación**, exactamente como si fuera una relación M:N del Paso 5.
+    - Primero, la entidad asociativa (ej: `Requisito_Puesto`) se convierte en una **nueva relación**, exactamente como si fuera una relación M:N del Paso 5.
         
     - La PK de esta nueva relación es la **clave compuesta** por las FKs de las entidades que conecta (`id_puesto` + `id_competencia`).
         
@@ -379,16 +379,16 @@ Usaremos el ejemplo de la sección 5.5 del Tema 5 donde teníamos `Puesto_de_Tra
         
 2. **Mapear las Relaciones "Puente" (Usando Paso 3 o 4):**
     
-    - Una vez que `Asoc_Requisito_Puesto` es una relación, la tratamos como cualquier otra relación normal.
+    - Una vez que `Requisito_Puesto` es una relación, la tratamos como cualquier otra relación normal.
         
-    - Ahora, mapeamos la relación "puente" (ej: `VALIDADA_POR` entre `Asoc_Requisito_Puesto` y `Validador`) siguiendo las reglas estándar del **Paso 3 (1:1)** o **Paso 4 (1:N)** según corresponda.
+    - Ahora, mapeamos la relación "puente" (ej: `VALIDADO_POR` entre `Requisito_Puesto` y `Validador`) siguiendo las reglas estándar del **Paso 3 (1:1)** o **Paso 4 (1:N)** según corresponda.
 	
-	    - Dado que `VALIDADA_POR` relaciona `Asoc_Requisito_Puesto[0..N]` ↔ `Validador[1..1]` se aplicaría el Caso General del Paso 4 con restricción de nulidad
+	    - Dado que `VALIDADO_POR` relaciona `Requisito_Puesto[0..N]` ↔ `Validador[1..1]` se aplicaría el Caso General del Paso 4 con restricción de nulidad
 	    - Esquema resultante:
 		    - Puesto_de_Trabajo (<u>id_puesto</u>, nombre_puesto)
 		    - Competencia (<u>id_competencia</u>, nombre_competencia)`
 		    - Validador (<u>id_validador</u>, nombre, apellido)
-		    - Asoc_Requisito_Puesto(<u>id_puesto</u>, <u>id_competencia</u>, id_validador)
+		    - Requisito_Puesto(<u>id_puesto</u>, <u>id_competencia</u>, id_validador)
 			    - id_puesto -> Puesto_de_Trabajo(id_puesto) [B:C,M:C]
 			    - id_competencia -> Competencia(id_competencia) [B:C,M:C]
 			    - id_validador `NOT NULL` -> Validador(id_validador) [B:R,M:C]
@@ -455,7 +455,7 @@ Este escenario es muy similar al mapeo de relaciones M:N y ==**se aplica el Enfo
 	- ![600](../imgs/BD%20-%20MapeoER14_X1aX1_X1.png)
 
 - **Ejemplo SUMINISTRA**:
-	![600](../imgs/BD%20-%20BigER%20Ternaria%20Proveedor%20Proyecto%20Suministro%20Crows%20Foot.png)
+	![600](../imgs/BD%20-%20BigER%20Ternaria%20Proveedor%20Proyecto%20Suministro.png)
 	- Un `Proveedor` puede suministrar _muchos_ `Repuesto[1..N]` a _muchos_ `Proyecto([1..N]`).
 	- A `Proyecto` le suministran _muchos_ `Proveedor([1..N]`)  _muchos_ `Repuesto[1..N]`.
 	- Un `Repuesto es suministrado a _muchos_ `Proyecto([1..N]`) por _muchos_ `Proveedor[1..N]`.
@@ -530,8 +530,8 @@ Esta es la **estrategia más limpia, flexible y recomendada en general**.
 - **Cuándo usarla**: **SOLO** funciona si la especialización es **TOTAL y DISJUNTA**
 
 - **Ejemplo Vehículo**:
-	![400](../imgs/BD%20-%20BigER%20Jerarquia%20Vehiculo%20old.png)
-	- COCHE(<u>id_vehiculo</u>, matricula, precio, max_velocidad, num_pasajeros)
+	![400](../imgs/BD%20-%20BigER%20Jerarquia%20Vehiculo.png)
+	- COCHE(<u>id_vehiculo</u>, matricula, precio, max_velocidad, numero_pasajeros)
 	- CAMION(<u>id_vehiculo</u>, matricula, precio, tonelaje, numero_ejes)
       
 
@@ -574,8 +574,9 @@ Esta es la **estrategia más limpia, flexible y recomendada en general**.
 - **Cuándo usarla**: Es la unica opción de relación única con especializaciones **SOLAPADAS** (también sirve para **DISJUNTAS**).
     
 - **Ejemplo Persona**:
+	
 	![350](../imgs/BD%20-%20BigER%20Jerarquia%20Universidad%20Sencilla.png)
-	- PERSONA(<u>dni</u>, nombre, apellido1,apellido2, **estudiante**, **empleado**, notaSelectividad, puesto, salario)
+	- PERSONA(<u>dni</u>, nombre, apellido_1,apellido_2, **estudiante**, **empleado**, nota_selectividad, puesto, salario)
 
  ---
     

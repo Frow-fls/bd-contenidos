@@ -9,7 +9,7 @@
 | 6    | 12/10-16/10 | FIESTA       | Tema 3           | Tema 3        | LAB05 - JOIN                              |                                                         |
 | 7    | 19/10-23/10 | Tema 4       | Tema 4           | Tema 4        | LAB06 - Subconsultas y LAB07 - Repaso SQL |                                                         |
 | 8    | 26/10-30/10 | Tema 5       | Tema 5           | Tema 5        | LAB08 - Corrección prueba SQL             | 26/10/2025<br>Prueba SQL - Relacional (mañana) en papel |
-| 9    | 02/11-06/11 | FIESTA       | Tema 5           | Tema 5        | LAB09 - BigER 1                           |                                                         |
+| 9    | 02/11-06/11 | FIESTA       | Tema 5           | Tema 5        | [LAB09 - BigER 1](labs/LAB09%20-%20BigER%201.md)                           |                                                         |
 | 10   | 09/11-13/11 | Tema 5       | Tema 5           | Tema 5        | LAB10 - BigER 2                           |                                                         |
 | 11   | 16/11-20/11 | Tema 5       | Tema 5           | Tema 5        | LAB11 – BigER 3                           |                                                         |
 | 12   | 23/11-27/11 | Tema 6       | Tema 6           | Tema 6        | LAB12 – BigER 4                           |                                                         |
