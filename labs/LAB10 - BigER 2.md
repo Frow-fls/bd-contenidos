@@ -4,7 +4,7 @@
 
 1.-Familiarizarse con la **sintaxis** de jerarquías de la notación BigER.
 
-2.-Gestionar **herencia** o **especialización** de entidades, representando subtipos y supertipos de forma correcta en la notación BigER
+2.-Gestionar **jerarquías de herencia** de entidades, representando subtipos y supertipos de forma correcta en la notación BigER
 
 3.-Aplicar la notación para solucionar problemas de diseño E/R
 
@@ -57,95 +57,87 @@ Donde:
 Crea el archivo EjemplosEERBigER.erd:
 
 1.- En primer lugar vamos a crear la entidad Empleado que va a ser el supertipo del resto de entidades que vamos a crear en este ejemplo:
-
-`entity` Empleado {  
-dni `key`  
-nombre  
-fecha_nacimiento  
-direccion  
-telefono  
+entity Empleado {
+dni key
+nombre
+fecha_nacimiento
+direccion
+telefono
 }
 
 2.- En segundo lugar, vamos a crear una primera especialización de Empleado en tres subtipos de acuerdo al tipo de puesto de cada Empleado donde cada subtipo tiene un atributo propio de su subtipo que no tiene el supertipo Empleado:
 
-// `parcial`, `disjunta`  
-`entity` Administrativo `extends` Empleado{  
-dni `key`  
-categoria  
+ //Especialización por puesto, parcial,disjunta
+hierarchy por_puesto Empleado partial disjoint
+
+entity Administrativo extends por_puesto {
+dni key
+categoria
 }
 
-//`parcial`, `disjunta`  
-`entity` Tecnico `extends` Empleado{  
-dni `key`
-nivel  
+entity Tecnico extends por_puesto {
+dni key
+nivel
 }
 
-//`parcial`, `disjunta`  
-`entity` Ingeniero `extends` Empleado{  
-dni `key`  
-tipo_ingeniero  
+entity Ingeniero extends por_puesto {
+dni key
+tipo_ingeniero
 }
 
 Tras escribir ese texto, deberías poder ver en la ventana del diagrama E/R algo similar a lo que se muestra en la siguiente pantalla:
 
-![](../imgs/BD%20-%20BigER%20Jerarquia%20Tipo%20Empleado.png)
+![](../imgs/BD%20-%20BigER%20Jerarquia%20Empleado%20por%20puesto.png)
 
 3.- En tercer lugar, vamos a crear una segunda especialización de Empleado en un subtipo de acuerdo a la relación dirige con una entidad denominada Proyecto que solo tienen un subtipo del supertipo Empleado al que denominaremos Gerente.
 
 Hay que tener en cuenta que al tener solo un subtipo siempre será parcial y sin restricción de disyunción:
 
-//`parcial`  
-`entity` Gerente `extends` Empleado{  
-dni `key`  
+//Especialización por responsabilidad, parcial
+hierarchy por_responsabilidad Empleado partial
+
+entity Gerente extends por_responsabilidad {
+dni key
 }
 
-`entity` Proyecto{  
-codigo_proyecto `key`
+entity Proyecto {
+codigo_proyecto key
 }
 
-`relationship` dirige{  
-Gerente[`1..1`] -> Proyecto[`1..N`]
+relationship dirige{
+Gerente[1..1] -> Proyecto[1..N]
 }
 
 Tras escribir ese texto, deberías poder ver en la ventana del diagrama E/R algo similar a lo que se muestra en la siguiente pantalla:
 
-![](../imgs/BD%20-%20BigER%20Jerarquia%20Gerente.png)
+![](../imgs/BD%20-%20BigER%20Jerarquia%20Empleado%20por%20puesto%20y%20responsabilidad.png)
 
 4.- En tercer lugar, vamos a crear una tercera especialización de Empleado en dos subtipos de acuerdo al tipo de jornada de cada Empleado donde cada subtipo tiene un atributo propio de su subtipo que no tiene el supertipo Empleado. Además, uno de los dos subtipos posibles también mantiene una relación que no tiene el resto de empleados:
 
-//`total`, `disjunta`  
-`entity` Empleado_Tiempo_Completo `extends` Empleado{  
-    dni `key`  
-salario  
+//Especialización por jornada,total,disjunta
+hierarchy por_jornada Empleado total disjoint
+
+entity Tiempo_Completo extends por_jornada {
+dni key
+salario
 }
 
-//`total`, `disjunta`
-`entity` Empleado_Tiempo_Parcial `extends` Empleado{  
- dni `key`  
+entity Tiempo_Parcial extends por_jornada {
+dni key
 horas_semanales
 }
 
-`entity` Sindicato{  
- codigo_sindicato `key`
+relationship afiliado_a{
+Empleado_Tiempo_Parcial[1..N] -> Sindicato[1..1]
 }
 
-`relationship` afiliado_a{  
-Empleado_Tiempo_Parcial[`1..N`] -> Sindicato[`1..1`]
+entity Sindicato {
+codigo_sindicato key
 }
 
 Tras escribir ese texto, deberías poder ver en la ventana del diagrama E/R algo similar a lo que se muestra en la siguiente pantalla:
 
-![](../imgs/BD%20-%20BigER%20Jerarquia%20Afiliado%20A.png)
-
-Puedes ver como, al estar en fase beta, BigER no es capaz de mostrar las restricciones de completitud y disyunción en el diagrama.
-
-Para poder mostrar estas restricciones, al igual que ocurría con los atributos de relación, en el diagrama final tendremos que recurrir a otras herramientas que nos permitan incluir líneas y texto sobre la imagen del diagrama cuando tengamos nuestro diagrama terminado.
-
-Como ya hemos comentado, en nuestro caso, en los distintos diagramas E/R que ves en la asignatura, estamos recurriendo a PowerPoint (también es igual de sencillo en cualquier otro editor de presentaciones) dado lo fácil que es incluir sobre una imagen tanto distintas formas como texto.
-
-Así, puedes ver a continuación este diagrama tras retocar la imagen para incluir un cuadro de texto con las iniciales de las restricciones que apliquen en la especialización/generalización ( t,d o t,s o p,d o p,s o p) cerca de las flechas de la especialización/generalización y añadir también una línea recta uniendo las flechas a las que aplica dicha especialización/generalización:
-
-![](../imgs/BD%20-%20BigER%20Jerarquia%20Empleado%20retocada.png)
+![](../imgs/BD%20-%20BigER%20Jerarquia%20Empleado.png)
 
 ---
 ### Ejercicio 01 - Jerarquías (1)
@@ -156,11 +148,11 @@ Crea el archivo ModeloEERUniversidad.erd que será donde vamos a ir modelando el
 
 En primer lugar, escribe la descripción de la entidad Persona_UEx que va a ser la raíz de toda la jerarquía:
 
-`entity` Persona_UEX {  
-nif `key`  
+entity Persona_UEX {
+nif key
 }
 
-A continuación vamos a hacer la primera especialización de Persona_UEx entre Empleado y Estudiante.
+A continuación, escribe la primera especialización de Persona_UEx entre Empleado y Estudiante.
 
 Escribe el texto BigER necesario para modelar todo esto y visualiza el resultado en el diagrama en VsCode. Antes de continuar asegúrate de estar entendiendo cómo se está representando gráficamente todo.
 
@@ -175,16 +167,17 @@ Seguimos con el archivo ModeloEERUniversidad.erd donde estamos modelando el ejem
 
 Vamos a añadir lo siguiente a lo que ya llevamos:
 
-//`total`, `solapada`
-`entity` Docente `extends` Empleado {
-nif `key`
-}
-//`total`, `solapada`
-`entity` PTGAS `extends` Empleado {
-nif `key`
+hierarchy por_tipo_empleado Empleado total overlapping
+
+entity Docente extends por_tipo_empleado {
+nif key
 }
 
-A continuación vamos a añadir la especialización de Docente en Catedratico y Titular (ten en cuenta que existen más subtipos de docente que no van a aparecer en nuestra jerarquía (Sustituto, Ayudante,...) aparte de estos dos antes de contestar.
+entity PTGAS extends por_tipo_empleado {
+nif key
+}
+
+A continuación escribe la especialización de Docente en Catedratico y Titular (ten en cuenta que existen más subtipos de docente que no van a aparecer en nuestra jerarquía (Sustituto, Ayudante,...) aparte de estos dos antes de contestar.
 
 Escribe el texto BigER necesario para modelar todo esto y visualiza el resultado en el diagrama en VsCode. Antes de continuar asegúrate de estar entendiendo cómo se está representando gráficamente todo.
 
@@ -196,24 +189,19 @@ Seguimos con el archivo ModeloEERUniversidad.erd donde estamos modelando el ejem
 
 ![](../imgs/BD%20-%20BigER%20Jerarquia%20Universidad.png)
 
-
-
 Vamos a añadir lo siguiente a lo que ya llevamos:
 
-//`parcial`
-`entity` Estudiante_Politecnica `extends` Estudiante {
-nif `key`
-}
-//`total`, `disjunta`
-`entity` Mayor_De_Edad `extends` Estudiante_Politecnica {
-nif `key`
-}
-//`total`, `disjunta`
-`entity` Menor_De_Edad `extends` Estudiante_Politecnica {
-nif `key`
+hierarchy por_edad Estudiante_Politecnica total disjoint
+
+entity Mayor_De_Edad extends por_edad {
+nif key
 }
 
-A continuación vamos a añadir la especialización de Estudiante_Politecnica en Estudiante_Informatica, Estudiante_Civil y Estudiante_Edificacion y ten en cuenta que puede haber estudiantes de varias titulaciones a la vez y que hay más titulaciones en Politécnica.
+entity Menor_De_Edad extends por_edad {
+nif key
+}
+
+A continuación escribe la especialización de Estudiante_Politecnica en Estudiante_Informatica, Estudiante_Civil y Estudiante_Edificacion y ten en cuenta que puede haber estudiantes de varias titulaciones a la vez y que hay más titulaciones en Politécnica.
 
 Escribe el texto BigER necesario para modelar todo esto y visualiza el resultado en el diagrama en VsCode. Antes de continuar asegúrate de estar entendiendo cómo se está representando gráficamente todo.
 

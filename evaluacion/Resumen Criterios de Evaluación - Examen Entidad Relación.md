@@ -25,7 +25,7 @@
 
 #### a) Entidades fuertes (no débiles):
 
-- **M1**: Dejar entidades sin ningún atributo que la describa(más allá de la clave o incluso sin ella).
+- **M1**: Dejar entidades no asociativas sin ningún atributo que la describa(más allá de la clave o incluso sin ella).
     
 - **M2**: Crear entidades que no son necesarias según los requisitos.
     
@@ -107,8 +107,8 @@
     
 - **L18**: No hacer un subtipo cuando sí hay atributos/relaciones específicas para un subconjunto de las instancias del supertipo.
     
-- **L19**: Relacionar una entidad externa con un subtipo cuando la relación era con el supertipo.
+- **L19**: Relacionar una entidad externa con el supertipo cuando la relación era específica de un subtipo.
     
-- **L20**: Relacionar una entidad externa con el supertipo cuando la relación era específica de un subtipo.
+- **L20**: Relacionar una entidad externa con un subtipo cuando la relación era con el supertipo.
     
 - **L21**: Indicar incorrectamente las restricciones de la jerarquía (total/parcial, disjunta/solapada).
